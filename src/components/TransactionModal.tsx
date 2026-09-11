@@ -101,7 +101,7 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
                 className={`flex-1 py-2 rounded-xl text-sm font-medium transition-colors border ${
                   type === t
                     ? t === 'income'
-                      ? 'bg-income text-white border-income'
+                      ? 'bg-income text-brand-brown border-income'
                       : 'bg-expense text-white border-expense'
                     : 'bg-transparent text-text-secondary border-border hover:border-text-secondary'
                 }`}
@@ -169,7 +169,7 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
           <button
             type="submit"
             disabled={saving}
-            className="w-full py-3 rounded-xl font-medium text-white bg-income hover:bg-income/90 transition-colors disabled:opacity-50"
+            className="w-full py-3 rounded-xl font-medium text-brand-brown bg-income hover:bg-income/90 transition-colors disabled:opacity-50"
           >
             {saving ? 'Salvando...' : 'Salvar'}
           </button>
