@@ -62,7 +62,7 @@ export function Login() {
               <div key={m.nome} className="flex items-start">
 
                 {/* Coluna do mascote*/}
-                <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col gap-2">
                   {/* Foto do mascote*/}
                   <img
                     src={m.img}
@@ -88,8 +88,11 @@ export function Login() {
         <div>
           
 
-          <p className="mt-6 text-xs uppercase tracking-widest font-display italic text-base leading-snug" style={{ color: '#E8A898' }}>
-            Juntos por uma vida financeira mais simples.
+          <p className="mt-6 text-xs text-center text-base leading-snug" style={{ color: '#8A7A70' }}>
+            Criado por 
+            <a className="font-bold" style={{ color: '#E8A898' }} href="https://ademirpatricio.com.br" target="_blank"> Ademir Patrício</a> / 
+            <a className="font-bold" style={{ color: '#E8A898' }} href="https://malabares.com.br" target="_blank"> Malabares MKT & TEC</a> 
+            • Juntos por uma vida financeira mais simples.
           </p>
         </div>
       </div>
