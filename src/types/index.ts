@@ -5,6 +5,7 @@ export interface Category {
   user_id: string
   name: string
   type: TransactionType
+  icon: string | null
   created_at: string
 }
 

@@ -16,17 +16,17 @@ export function SummaryCards({ transactions }: Props) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
       {/* Saldo */}
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-border relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-1 h-full rounded-l-2xl" style={{ backgroundColor: balance >= 0 ? '#8A9B6A' : '#C4604A' }} />
+      <div className="bg-white rounded p-5 shadow-sm border border-border relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1 h-full rounded-l-2xl" style={{ backgroundColor: '#5B7A96' }} />
         <div className="flex items-start justify-between mb-3">
           <p className="text-xs uppercase tracking-widest text-text-secondary">Saldo atual</p>
-          <span className="text-text-secondary opacity-50">
+          <span style={{ color: '#5B7A96', opacity: 0.7 }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
           </span>
         </div>
-        <p className={`text-2xl font-bold ${balance >= 0 ? 'text-income' : 'text-expense'}`}>
+        <p className="text-2xl font-bold text-brand-blue" style={{ color: '#5B7A96' }}>
           {fmt(balance)}
         </p>
         <p className="text-xs text-text-secondary mt-1">
@@ -35,7 +35,7 @@ export function SummaryCards({ transactions }: Props) {
       </div>
 
       {/* Entradas */}
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-border relative overflow-hidden">
+      <div className="bg-white rounded p-5 shadow-sm border border-border relative overflow-hidden">
         <div className="absolute top-0 left-0 w-1 h-full rounded-l-2xl" style={{ backgroundColor: '#8A9B6A' }} />
         <div className="flex items-start justify-between mb-3">
           <p className="text-xs uppercase tracking-widest text-text-secondary">Entradas</p>
@@ -52,7 +52,7 @@ export function SummaryCards({ transactions }: Props) {
       </div>
 
       {/* Saídas */}
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-border relative overflow-hidden">
+      <div className="bg-white rounded p-5 shadow-sm border border-border relative overflow-hidden">
         <div className="absolute top-0 left-0 w-1 h-full rounded-l-2xl" style={{ backgroundColor: '#C4604A' }} />
         <div className="flex items-start justify-between mb-3">
           <p className="text-xs uppercase tracking-widest text-text-secondary">Saídas</p>

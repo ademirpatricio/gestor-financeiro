@@ -21,7 +21,7 @@ function greeting() {
 export function Dashboard() {
   const { session } = useAuth()
   const { transactions, loading, addTransaction, updateTransaction, deleteTransaction } = useTransactions()
-  const { categories, addCategory, deleteCategory } = useCategories()
+  const { categories, addCategory, deleteCategory, updateCategory } = useCategories()
 
   const [view, setView] = useState<View>('dashboard')
   const [modalOpen, setModalOpen] = useState(false)
@@ -55,13 +55,13 @@ export function Dashboard() {
                 <p className="text-xs uppercase tracking-widest text-text-secondary mb-1">
                   {new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}
                 </p>
-                <h1 className="font-display italic text-3xl text-text-primary leading-tight">
+                <h1 className="font-bold text-3xl text-text-primary leading-tight">
                   {greeting()}, <span style={{ color: '#C4604A' }}>{name}.</span>
                 </h1>
               </div>
               <button
                 onClick={openAdd}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90"
+                className="flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90"
                 style={{ backgroundColor: '#5A6B3A' }}
               >
                 <span>+</span> Nova transação
@@ -79,7 +79,7 @@ export function Dashboard() {
             )}
           </>
         ) : (
-          <CategoryManager categories={categories} onAdd={addCategory} onDelete={deleteCategory} />
+          <CategoryManager categories={categories} onAdd={addCategory} onDelete={deleteCategory} onUpdate={updateCategory} />
         )}
       </main>
 

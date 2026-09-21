@@ -14,7 +14,7 @@ export function Sidebar({ view, onChangeView }: Props) {
 
   return (
     <aside
-      className="w-56 shrink-0 flex flex-col justify-between py-8 px-5 min-h-screen"
+      className="w-56 shrink-0 flex flex-col justify-between py-8 px-5 h-screen sticky top-0 overflow-y-auto"
       style={{ backgroundColor: '#2D1F17' }}
     >
       <div>
@@ -90,7 +90,7 @@ function NavItem({
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left"
+      className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded text-sm font-medium transition-all text-left"
       style={{
         backgroundColor: active ? 'rgba(255,255,255,0.1)' : 'transparent',
         color: active ? '#FBF8F5' : '#8A7A70',

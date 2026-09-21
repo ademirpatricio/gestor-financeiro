@@ -21,13 +21,14 @@ export function useCategories() {
     fetchCategories()
   }, [fetchCategories])
 
-  async function addCategory(name: string, type: TransactionType) {
+  async function addCategory(name: string, type: TransactionType, icon: string | null = null) {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) throw new Error('Not authenticated')
 
     const { error } = await supabase.from('categories').insert({
       name,
       type,
+      icon,
       user_id: user.id,
     })
 
@@ -41,5 +42,14 @@ export function useCategories() {
     await fetchCategories()
   }
 
-  return { categories, loading, addCategory, deleteCategory, refetch: fetchCategories }
+  async function updateCategory(id: string, name: string, icon: string | null) {
+    const { error } = await supabase
+      .from('categories')
+      .update({ name, icon })
+      .eq('id', id)
+    if (error) throw error
+    await fetchCategories()
+  }
+
+  return { categories, loading, addCategory, deleteCategory, updateCategory, refetch: fetchCategories }
 }

@@ -10,7 +10,7 @@ export function useTransactions() {
     setLoading(true)
     const { data, error } = await supabase
       .from('transactions')
-      .select('*, categories(id, name, type)')
+      .select('*, categories(id, name, type, icon)')
       .order('date', { ascending: false })
 
     if (!error && data) setTransactions(data as Transaction[])

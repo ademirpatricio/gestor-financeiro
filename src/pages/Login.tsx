@@ -4,6 +4,8 @@ import { useAuth } from '../hooks/useAuth'
 import mascotCofre from '../assets/images/img1.png'
 import mascotMeta from '../assets/images/img2.png'
 import mascotJuros from '../assets/images/img3.png'
+import bgDark from '../assets/images/background1.png'
+import bgLight from '../assets/images/background2.png'
 
 const mascots = [
   { nome: 'Cofre', papel: 'O principal', frase: '"Dinheiro bem cuidado leva a uma vida melhor."', img: mascotCofre },
@@ -41,7 +43,7 @@ export function Login() {
       {/* ── Coluna esquerda ── */}
       <div
         className="hidden lg:flex flex-col w-1/2 p-12 relative overflow-hidden"
-        style={{ backgroundColor: '#2D1F17' }}
+        style={{ backgroundImage: `url(${bgDark})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         {/* Logo — centralizado vertical e horizontalmente */}
         <div className="flex-1 flex flex-col items-center justify-center">
@@ -99,19 +101,19 @@ export function Login() {
 
       {/* ── Coluna direita ── */}
       <div className="flex flex-1 flex-col items-center justify-center relative px-6 py-12"
-      style={{ backgroundColor: '#fff6f4' }}>
+      style={{ backgroundImage: `url(${bgLight})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
 
         {/* Wrapper central — logo mobile + card */}
         <div className="flex flex-col items-center w-full max-w-sm gap-6">
 
           {/* Logo mobile */}
-          <img src="/logo-primary.svg" alt="Grana" className="h-10 w-auto lg:hidden" />
+          <img src="/logo-primary.svg" alt="Grana" className="h-20 w-auto lg:hidden" />
 
         {/* Card do formulário */}
-        <div className="w-full bg-white rounded-3xl shadow-xl py-10 px-12">
+        <div className="w-full bg-white rounded shadow-xl py-10 px-12">
           <div className="mb-7">
             <h2 className="text-2xl font-bold text-text-primary mb-1.5">
-              Bem-vindo de volta 👋
+              Bem-vindo de volta
             </h2>
             <p className="text-text-secondary text-sm leading-relaxed">
               Entre com sua conta para continuar cuidando da sua vida financeira.
@@ -121,7 +123,7 @@ export function Login() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* E-mail */}
             <div>
-              <label className="block text-xs font-medium text-text-secondary mb-1.5">E-mail</label>
+              <label className="block text-md text-text-secondary mb-1.5">E-mail</label>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -142,7 +144,7 @@ export function Login() {
 
             {/* Senha */}
             <div>
-              <label className="block text-xs font-medium text-text-secondary mb-1.5">Senha</label>
+              <label className="block text-md text-text-secondary mb-1.5">Senha</label>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -156,7 +158,7 @@ export function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full border border-border rounded-xl pl-10 pr-10 py-2.5 bg-white text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-income/40 focus:border-income transition-colors"
+                  className="w-full border border-border rounded pl-10 pr-10 py-2.5 bg-white text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-income/40 focus:border-income transition-colors"
                 />
                 <button
                   type="button"
@@ -194,7 +196,7 @@ export function Login() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 rounded-xl font-semibold text-white text-sm transition-all disabled:opacity-50 flex items-center justify-center gap-2 hover:opacity-90 mt-2"
+              className="w-full py-3 rounded font-semibold text-white text-sm transition-all disabled:opacity-50 flex items-center justify-center gap-2 hover:opacity-90 mt-2"
               style={{ backgroundColor: '#5A6B3A' }}
             >
               {submitting ? 'Entrando...' : <><span>Entrar</span><span>→</span></>}
