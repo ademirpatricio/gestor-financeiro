@@ -5,7 +5,6 @@ import mascotCofre from '../assets/images/img1.png'
 import mascotMeta from '../assets/images/img2.png'
 import mascotJuros from '../assets/images/img3.png'
 import bgDark from '../assets/images/background1.png'
-import bgLight from '../assets/images/background2.png'
 
 const mascots = [
   { nome: 'Cofre', papel: 'O principal', frase: '"Dinheiro bem cuidado leva a uma vida melhor."', img: mascotCofre },

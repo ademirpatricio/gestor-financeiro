@@ -22,3 +22,6 @@ dist-ssr
 
 # os
 .DS_Store
+
+# vite
+*.timestamp-*.mjs
