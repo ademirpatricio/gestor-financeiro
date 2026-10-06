@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { CategoryManager } from '../components/CategoryManager'
+import { Settings } from '../components/Settings'
 import { Sidebar } from '../components/Sidebar'
 import { SummaryCards } from '../components/SummaryCards'
 import { TransactionList } from '../components/TransactionList'
@@ -9,7 +10,7 @@ import { useCategories } from '../hooks/useCategories'
 import { useTransactions } from '../hooks/useTransactions'
 import type { Transaction } from '../types'
 
-type View = 'dashboard' | 'categories'
+type View = 'dashboard' | 'categories' | 'settings'
 
 function greeting() {
   const h = new Date().getHours()
@@ -20,14 +21,14 @@ function greeting() {
 
 export function Dashboard() {
   const { session } = useAuth()
-  const { transactions, loading, addTransaction, updateTransaction, deleteTransaction } = useTransactions()
+  const { transactions, loading, addTransaction, updateTransaction, deleteTransaction, deleteAllTransactions } = useTransactions()
   const { categories, addCategory, deleteCategory, updateCategory } = useCategories()
 
   const [view, setView] = useState<View>('dashboard')
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<Transaction | null>(null)
 
-  const name = session?.user.email?.split('@')[0] ?? ''
+  const name = (session?.user.user_metadata?.name as string | undefined)?.trim() || (session?.user.email?.split('@')[0] ?? '')
 
   function openAdd() { setEditing(null); setModalOpen(true) }
   function openEdit(t: Transaction) { setEditing(t); setModalOpen(true) }
@@ -43,7 +44,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="flex min-h-screen bg-bg">
+    <div className="flex min-h-screen">
       <Sidebar view={view} onChangeView={setView} />
 
       <main className="flex-1 p-8 overflow-auto">
@@ -78,6 +79,8 @@ export function Dashboard() {
               <TransactionList transactions={transactions} onEdit={openEdit} onDelete={handleDelete} />
             )}
           </>
+        ) : view === 'settings' ? (
+          <Settings onResetAll={deleteAllTransactions} />
         ) : (
           <CategoryManager categories={categories} onAdd={addCategory} onDelete={deleteCategory} onUpdate={updateCategory} />
         )}

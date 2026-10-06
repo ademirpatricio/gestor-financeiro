@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import mascotCofre from '../assets/images/img1.png'
 import mascotMeta from '../assets/images/img2.png'
@@ -38,7 +38,7 @@ export function Login() {
   }
 
   return (
-    <div className="min-h-screen flex bg-bg">
+    <div className="min-h-screen flex">
 
       {/* ── Coluna esquerda ── */}
       <div
@@ -48,7 +48,8 @@ export function Login() {
         {/* Logo — centralizado vertical e horizontalmente */}
         <div className="flex-1 flex flex-col items-center justify-center">
           <img src="/logo-dark.svg" alt="Grana" className="h-32 w-auto" />
-          <p className="text-xs uppercase tracking-widest mt-3 text-center" style={{ color: '#8A7A70' }}>
+          <p className="text-xs uppercase tracking-widest mt-3 text-center" 
+          style={{ color: '#8A7A70' }}>
             Pequenas escolhas.{' '}
             <span style={{ color: '#C4604A' }}>Grandes conquistas.</span>
           </p>
@@ -99,33 +100,32 @@ export function Login() {
         </div>
       </div>
 
+
       {/* ── Coluna direita ── */}
-      <div className="flex flex-1 flex-col items-center justify-center relative px-6 py-12"
-      style={{ backgroundImage: `url(${bgLight})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div className="flex flex-1 flex-col items-center 
+      justify-center relative px-6 py-12
+      bg-gradient-to-tl from-salmon_light to-white">
 
         {/* Wrapper central — logo mobile + card */}
-        <div className="flex flex-col items-center w-full max-w-sm gap-6">
+        <div className="flex flex-col w-full max-w-sm text-left gap-6">
 
           {/* Logo mobile */}
           <img src="/logo-primary.svg" alt="Grana" className="h-20 w-auto lg:hidden" />
 
-        {/* Card do formulário */}
-        <div className="w-full bg-white rounded shadow-xl py-10 px-12">
-          <div className="mb-7">
-            <h2 className="text-2xl font-bold text-text-primary mb-1.5">
-              Bem-vindo de volta
-            </h2>
-            <p className="text-text-secondary text-sm leading-relaxed">
-              Entre com sua conta para continuar cuidando da sua vida financeira.
-            </p>
-          </div>
+          <h2 className="text-2xl font-bold text-brown_dark">
+            Bem vindo ao <span className="text-terracotta">Grana</span>
+          </h2>
+          <p className="text-brown_light text-body">
+            Entre com sua conta para continuar cuidando da sua vida financeira com a gente.
+          </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+
             {/* E-mail */}
             <div>
-              <label className="block text-md text-text-secondary mb-1.5">E-mail</label>
+              <label className="text-body font-bold text-brown_dark mb-2">Email</label>
               <div className="relative">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                     <polyline points="22,6 12,13 2,6"/>
@@ -137,17 +137,20 @@ export function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="seu@email.com"
                   required
-                  className="w-full border border-border rounded pl-10 pr-4 py-2.5 bg-white text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-income/40 focus:border-income transition-colors"
+                  className="w-full border-b-2 border-brown_dark bg-transparent 
+                  pl-10 pr-4 py-4 transition-colors
+                  text-brown_light text-body focus:outline-none focus:ring-0"
                 />
               </div>
             </div>
 
             {/* Senha */}
             <div>
-              <label className="block text-md text-text-secondary mb-1.5">Senha</label>
+              <label className="text-body font-bold text-brown_dark mb-2">Senha</label>
               <div className="relative">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" 
+                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                   </svg>
@@ -158,7 +161,9 @@ export function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full border border-border rounded pl-10 pr-10 py-2.5 bg-white text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-income/40 focus:border-income transition-colors"
+                  className="w-full border-b-2 border-brown_dark pl-10 pr-4 py-4 transition-colors
+                  text-brown_light text-body bg-transparent
+                  focus:outline-none focus:ring-0 autofill:bg-transparent"
                 />
                 <button
                   type="button"
@@ -181,12 +186,13 @@ export function Login() {
             </div>
 
             {/* Lembrar + Esqueceu */}
-            <div className="flex items-center justify-between pt-0.5">
+            <div className="flex items-center justify-between py-4">
               <label className="flex items-center gap-2 text-sm text-text-secondary cursor-pointer select-none">
                 <input type="checkbox" className="rounded border-border accent-income" />
                 Lembrar de mim
               </label>
-              <a href="#" className="text-sm text-brand-olive underline hover:text-income transition-colors">
+              <a href="#" className="text-sm text-brand-olive underline 
+              hover:text-income transition-colors">
                 Esqueceu sua senha?
               </a>
             </div>
@@ -196,20 +202,35 @@ export function Login() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 rounded font-semibold text-white text-sm transition-all disabled:opacity-50 flex items-center justify-center gap-2 hover:opacity-90 mt-2"
-              style={{ backgroundColor: '#5A6B3A' }}
+              className="
+              w-full py-3 rounded font-bold 
+              text-white text-body transition-all 
+              disabled:opacity-50 flex items-center 
+              justify-center gap-2
+              bg-gradient-to-r from-olive_light to-olive"   
             >
               {submitting ? 'Entrando...' : <><span>Entrar</span><span>→</span></>}
             </button>
           </form>
-
-          <p className="text-center text-xs text-text-secondary mt-6">
-            Conta criada pelo{' '}
-            <a href="https://supabase.com" target="_blank" rel="noreferrer" className="underline hover:text-text-primary">
-              Supabase Dashboard
-            </a>.
+          <p className="text-center text-xs text-olive mt-4">
+            Ainda não tem conta?{' '}
+            <Link to="/cadastro" className="underline font-bold hover:text-olive_light">
+              Crie gratuitamente
+            </Link>
           </p>
-        </div>
+
+
+
+
+
+
+
+
+
+
+          
+
+
 
         </div>{/* fim wrapper central */}
 

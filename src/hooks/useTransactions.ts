@@ -65,6 +65,15 @@ export function useTransactions() {
     await fetchTransactions()
   }
 
+  async function deleteAllTransactions() {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Not authenticated')
+
+    const { error } = await supabase.from('transactions').delete().eq('user_id', user.id)
+    if (error) throw error
+    await fetchTransactions()
+  }
+
   const totals = transactions.reduce(
     (acc, t) => {
       if (t.type === 'income') acc.income += t.amount
@@ -81,6 +90,7 @@ export function useTransactions() {
     addTransaction,
     updateTransaction,
     deleteTransaction,
+    deleteAllTransactions,
     refetch: fetchTransactions,
   }
 }
