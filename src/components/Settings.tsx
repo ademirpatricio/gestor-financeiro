@@ -8,8 +8,8 @@ interface Props {
 const CONFIRM_WORD = 'ZERAR'
 
 const inputClass =
-  'w-full border border-[#E2D9D0] rounded px-3 py-2.5 text-sm text-[#2D1F17] bg-[#FBF8F5] focus:outline-none focus:ring-2 focus:ring-[#8A9B6A]/40'
-const labelClass = 'block text-xs uppercase tracking-widest text-[#8A7A70] mb-1.5'
+  'w-full border border-[#E2D9D0] rounded px-3 py-2.5 text-[#2D1F17] bg-[#FBF8F5] focus:outline-none focus:ring-2 focus:ring-[#8A9B6A]/40'
+const labelClass = 'block text-small uppercase tracking-widest text-[#8A7A70] mb-1.5'
 const cardClass = 'bg-[#FBF8F5] rounded border border-[#E2D9D0] shadow-sm p-6 mb-6 max-w-xl'
 
 type Feedback = { kind: 'ok' | 'error'; text: string } | null
@@ -18,7 +18,7 @@ function Message({ feedback }: { feedback: Feedback }) {
   if (!feedback) return null
   const color = feedback.kind === 'ok' ? '#5A6B3A' : '#C4604A'
   return (
-    <p className="text-sm mt-3" style={{ color }} role={feedback.kind === 'error' ? 'alert' : 'status'}>
+    <p className="mt-3" style={{ color }} role={feedback.kind === 'error' ? 'alert' : 'status'}>
       {feedback.text}
     </p>
   )
@@ -106,8 +106,8 @@ export function Settings({ onResetAll }: Props) {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold text-[#2D1F17] mb-1">Configurações</h2>
-      <p className="text-sm text-[#8A7A70] mb-6">Seus dados e sua conta.</p>
+      <h2 className="font-semibold text-[#2D1F17] mb-1">Configurações</h2>
+      <p className="text-[#8A7A70] mb-6">Seus dados e sua conta.</p>
 
       <form onSubmit={handleName} className={cardClass}>
         <h3 className="font-semibold text-[#2D1F17] mb-4">Seu nome</h3>
@@ -129,7 +129,7 @@ export function Settings({ onResetAll }: Props) {
         <button
           type="submit"
           disabled={savingName || name.trim() === currentName}
-          className="px-5 py-2.5 rounded text-sm font-semibold text-white transition-all hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="px-5 py-2.5 rounded font-semibold text-white transition-all hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
           style={{ backgroundColor: '#5A6B3A' }}
         >
           {savingName ? 'Salvando...' : 'Salvar nome'}
@@ -164,7 +164,7 @@ export function Settings({ onResetAll }: Props) {
         <button
           type="submit"
           disabled={savingPassword || !password || !confirm}
-          className="px-5 py-2.5 rounded text-sm font-semibold text-white transition-all hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="px-5 py-2.5 rounded font-semibold text-white transition-all hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
           style={{ backgroundColor: '#5A6B3A' }}
         >
           {savingPassword ? 'Salvando...' : 'Alterar senha'}
@@ -174,7 +174,7 @@ export function Settings({ onResetAll }: Props) {
 
       <form onSubmit={handleReset} className={`${cardClass} border-[#C4604A]/50`}>
         <h3 className="font-semibold mb-1" style={{ color: '#C4604A' }}>Começar do zero</h3>
-        <p className="text-sm text-[#8A7A70] mb-4 leading-relaxed">
+        <p className="text-[#8A7A70] mb-4 leading-relaxed">
           Apaga todas as suas entradas e saídas. Suas categorias continuam como estão.
           Não dá para desfazer.
         </p>
@@ -191,7 +191,7 @@ export function Settings({ onResetAll }: Props) {
         <button
           type="submit"
           disabled={resetting || confirmText !== CONFIRM_WORD}
-          className="px-5 py-2.5 rounded text-sm font-semibold text-white transition-all hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="px-5 py-2.5 rounded font-semibold text-white transition-all hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
           style={{ backgroundColor: '#C4604A' }}
         >
           {resetting ? 'Apagando...' : 'Apagar todas as movimentações'}

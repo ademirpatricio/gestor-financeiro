@@ -4,8 +4,8 @@ import { useAuth } from '../hooks/useAuth'
 import bgLight from '../assets/images/background2.png'
 
 const inputClass =
-  'w-full border border-[#E2D9D0] rounded px-4 py-2.5 bg-white text-[#2D1F17] text-sm focus:outline-none focus:ring-2 focus:ring-[#8A9B6A]/40 focus:border-[#8A9B6A] transition-colors'
-const labelClass = 'block text-sm text-[#8A7A70] mb-1.5'
+  'w-full border border-[#E2D9D0] rounded px-4 py-2.5 bg-white text-[#2D1F17] focus:outline-none focus:ring-2 focus:ring-[#8A9B6A]/40 focus:border-[#8A9B6A] transition-colors'
+const labelClass = 'block text-[#8A7A70] mb-1.5'
 
 export function Signup() {
   const { session, loading, signUp } = useAuth()
@@ -57,19 +57,19 @@ export function Signup() {
         <div className="w-full bg-white rounded shadow-xl py-10 px-12">
           {needsConfirmation ? (
             <div role="status">
-              <h2 className="text-2xl font-bold text-[#2D1F17] mb-1.5">Confira seu e-mail</h2>
-              <p className="text-[#8A7A70] text-sm leading-relaxed mb-6">
+              <h2 className="text-h4 font-bold text-[#2D1F17] mb-1.5">Confira seu e-mail</h2>
+              <p className="text-[#8A7A70] leading-relaxed mb-6">
                 Mandamos um link de confirmação para <strong>{email}</strong>. Clique nele e depois é só entrar.
               </p>
-              <Link to="/login" className="text-sm underline" style={{ color: '#5A6B3A' }}>
+              <Link to="/login" className="underline" style={{ color: '#5A6B3A' }}>
                 Ir para o login
               </Link>
             </div>
           ) : (
             <>
               <div className="mb-7">
-                <h2 className="text-2xl font-bold text-[#2D1F17] mb-1.5">Crie sua conta</h2>
-                <p className="text-[#8A7A70] text-sm leading-relaxed">
+                <h2 className="text-h4 font-bold text-[#2D1F17] mb-1.5">Crie sua conta</h2>
+                <p className="text-[#8A7A70] leading-relaxed">
                   Leva menos de um minuto. Depois é só começar a organizar sua grana.
                 </p>
               </div>
@@ -119,7 +119,7 @@ export function Signup() {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-[#8A7A70] hover:text-[#2D1F17] transition-colors"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-small text-[#8A7A70] hover:text-[#2D1F17] transition-colors"
                     >
                       {showPassword ? 'Ocultar' : 'Mostrar'}
                     </button>
@@ -139,19 +139,19 @@ export function Signup() {
                   />
                 </div>
 
-                {error && <p className="text-sm" style={{ color: '#C4604A' }} role="alert">{error}</p>}
+                {error && <p style={{ color: '#C4604A' }} role="alert">{error}</p>}
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3 rounded font-semibold text-white text-sm transition-all disabled:opacity-50 hover:opacity-90 mt-2"
+                  className="w-full py-3 rounded font-semibold text-white transition-all disabled:opacity-50 hover:opacity-90 mt-2"
                   style={{ backgroundColor: '#5A6B3A' }}
                 >
                   {submitting ? 'Criando...' : 'Criar conta'}
                 </button>
               </form>
 
-              <p className="text-center text-xs text-[#8A7A70] mt-6">
+              <p className="text-center text-small text-[#8A7A70] mt-6">
                 Já tem conta?{' '}
                 <Link to="/login" className="underline font-semibold" style={{ color: '#5A6B3A' }}>
                   Entrar

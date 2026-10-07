@@ -47,23 +47,24 @@ export function Dashboard() {
     <div className="flex min-h-screen">
       <Sidebar view={view} onChangeView={setView} />
 
-      <main className="flex-1 p-8 overflow-auto">
+      <main className="flex-1 p-8 overflow-auto bg-white">
         {view === 'dashboard' ? (
           <>
             {/* Header */}
             <div className="flex items-start justify-between mb-8">
               <div>
-                <p className="text-xs uppercase tracking-widest text-text-secondary mb-1">
-                  {new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}
+                <p className="text-small uppercase tracking-widest text-text-secondary mb-4">
+                  {new Date().toLocaleDateString('pt-BR', 
+                    { weekday: 'long', day: 'numeric', month: 'long' })}
                 </p>
-                <h1 className="font-bold text-3xl text-text-primary leading-tight">
-                  {greeting()}, <span style={{ color: '#C4604A' }}>{name}.</span>
-                </h1>
+                <h4 className="font-bold text-h4">
+                  {greeting()}, <span className="text-rust">{name}.</span>
+                </h4>
               </div>
               <button
                 onClick={openAdd}
-                className="flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90"
-                style={{ backgroundColor: '#5A6B3A' }}
+                className="flex items-center gap-2 px-5 py-3 rounded bg-olive
+                font-medium text-white shadow-sm transition-all hover:opacity-90"
               >
                 <span>+</span> Nova transação
               </button>

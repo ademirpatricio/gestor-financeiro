@@ -66,17 +66,17 @@ export function Sidebar({ view, onChangeView }: Props) {
       <div className="px-1">
         <div className="flex items-center gap-2.5 mb-4">
           <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+            className="w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0"
             style={{ backgroundColor: '#C4604A', color: '#FBF8F5' }}
           >
             {initials}
           </div>
-          <p className="text-xs truncate" style={{ color: '#8A7A70' }}>{name || email}</p>
+          <p className="text-small truncate" style={{ color: '#8A7A70' }}>{name || email}</p>
         </div>
         <div className="h-px mb-4" style={{ backgroundColor: '#3D2B1F' }} />
         <button
           onClick={signOut}
-          className="text-xs uppercase tracking-widest transition-colors flex items-center gap-2"
+          className="text-small uppercase tracking-widest transition-colors flex items-center gap-2"
           style={{ color: '#8A7A70' }}
           onMouseEnter={(e) => (e.currentTarget.style.color = '#C4604A')}
           onMouseLeave={(e) => (e.currentTarget.style.color = '#8A7A70')}
@@ -102,7 +102,7 @@ function NavItem({
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded text-sm font-medium transition-all text-left"
+      className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded font-medium transition-all text-left"
       style={{
         backgroundColor: active ? 'rgba(255,255,255,0.1)' : 'transparent',
         color: active ? '#FBF8F5' : '#8A7A70',

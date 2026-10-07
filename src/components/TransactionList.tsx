@@ -43,7 +43,7 @@ export function TransactionList({ transactions, onEdit, onDelete }: Props) {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className="px-4 py-1.5 rounded text-xs font-semibold uppercase tracking-wide transition-all"
+              className="px-4 py-1.5 rounded text-small font-semibold uppercase tracking-wide transition-all"
               style={filter === f ? {
                 backgroundColor: f === 'income' ? '#8A9B6A' : f === 'expense' ? '#C4604A' : '#2D1F17',
                 color: '#FBF8F5',
@@ -57,7 +57,7 @@ export function TransactionList({ transactions, onEdit, onDelete }: Props) {
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value as SortOption)}
-          className="text-xs border border-border rounded px-3 py-2 bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30 shadow-sm"
+          className="text-small border border-border rounded px-3 py-2 bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30 shadow-sm"
         >
           <option value="date_desc">Data (mais recente)</option>
           <option value="date_asc">Data (mais antiga)</option>
@@ -71,17 +71,17 @@ export function TransactionList({ transactions, onEdit, onDelete }: Props) {
       {sorted.length === 0 ? (
         <div className="text-center py-20">
           <div
-            className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-4"
+            className="w-16 h-16 rounded-full flex items-center justify-center text-h4 font-black mx-auto mb-4"
             style={{ backgroundColor: '#C4604A', color: '#FBF8F5' }}
           >C</div>
-          <p className="font-semibold text-lg text-text-secondary mb-1">Nada por aqui ainda.</p>
-          <p className="text-sm text-text-secondary">Adicione sua primeira transação!</p>
+          <p className="font-semibold text-text-secondary mb-1">Nada por aqui ainda.</p>
+          <p className="text-text-secondary">Adicione sua primeira transação!</p>
         </div>
       ) : (
         <div className="w-full">
           {/* Header */}
-          <div className="grid text-xs uppercase tracking-widest text-text-secondary font-medium pb-3"
-            style={{ gridTemplateColumns: '120px 1fr 180px 120px 80px' }}>
+          <div className="grid text-small uppercase font-medium pb-3 px-6 border-b"
+            style={{ gridTemplateColumns: '120px 1fr 180px 100px 80px' }}>
             <span className="flex items-center gap-1 cursor-pointer select-none"
               onClick={() => setSort(sort === 'date_desc' ? 'date_asc' : 'date_desc')}>
               Data
@@ -91,7 +91,7 @@ export function TransactionList({ transactions, onEdit, onDelete }: Props) {
             </span>
             <span>Descrição</span>
             <span>Categoria</span>
-            <span className="text-right">Valor</span>
+            <span className="text-center">Valor</span>
             <span className="text-right">Ações</span>
           </div>
 
@@ -105,14 +105,14 @@ export function TransactionList({ transactions, onEdit, onDelete }: Props) {
               return (
                 <li
                   key={t.id}
-                  className="grid items-center py-4 transition-colors [&:nth-child(even)]:bg-border/30 hover:bg-border/60"
+                  className="grid items-center py-4 px-6 transition-colors [&:nth-child(even)]:bg-brown_light/10"
                   style={{ gridTemplateColumns: '120px 1fr 180px 120px 80px' }}
                 >
                   {/* Data */}
-                  <span className="text-sm text-text-secondary">{fmtDate(t.date)}</span>
+                  <span className="text-text-secondary">{fmtDate(t.date)}</span>
 
                   {/* Descrição */}
-                  <span className="text-sm text-text-primary font-medium truncate pr-4">
+                  <span className="text-text-primary font-medium truncate pr-4">
                     {t.description || '—'}
                   </span>
 
@@ -124,14 +124,14 @@ export function TransactionList({ transactions, onEdit, onDelete }: Props) {
                     >
                       <CategoryIcon name={catIcon ?? null} size={15} color="#fff" />
                     </div>
-                    <span className="text-sm text-text-primary truncate">
+                    <span className="text-text-primary truncate">
                       {cat?.name ?? 'Sem categoria'}
                     </span>
                   </div>
 
                   {/* Valor */}
                   <span
-                    className="text-sm font-bold text-right"
+                    className="font-bold text-right"
                     style={{ color: isIncome ? '#8A9B6A' : '#C4604A' }}
                   >
                     {isIncome ? '+' : '-'} {fmt(t.amount)}

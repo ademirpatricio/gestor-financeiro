@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply text-brown font-sans;
+    @apply text-body text-brown font-sans;
   }
 }
 

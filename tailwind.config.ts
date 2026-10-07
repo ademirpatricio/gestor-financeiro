@@ -10,6 +10,7 @@ export default {
         white:        '#FBF8F5',
         terracotta:   '#a34630',
         rust:         '#C85A2A',
+        rust_light:   '#e6865d',
         salmon:       '#E8A898',
         salmon_light: '#f9e4e0',
         brown:        '#3D2B1F',
@@ -27,15 +28,15 @@ export default {
       },
 
       fontSize: {
-        'h1':    ['clamp(45px, 5vw, 64px)',   { lineHeight: '1.1',  letterSpacing: '-0.03em' }],
-        'h2':    ['clamp(32px, 4vw, 45px)',   { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        'h3':    ['clamp(22px, 2.7vw, 32px)', { lineHeight: '1.1',  letterSpacing: '-0.01em' }],
-        'h4':    ['24px', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+        'h1':    ['clamp(2.8rem, 5vw, 4rem)',   { lineHeight: '1.1',  letterSpacing: '-0.03em' }],
+        'h2':    ['clamp(2rem, 4vw, 2.8rem)',   { lineHeight: '1.1',  letterSpacing: '-0.02em' }],
+        'h3':    ['clamp(1.4rem, 2.7vw, 2rem)', { lineHeight: '1.1',  letterSpacing: '-0.01em' }],
+        'h4':    ['1.5rem',                     { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+        'h5':    ['20px',                       { lineHeight: '1.25', letterSpacing: '-0.01em' }],
 
-        'body':  ['17px', { lineHeight: '1.75' }],
-        'span':  ['clamp(10px, 3vw, 14px)', { letterSpacing: '0.2em', fontWeight: '500' }], // uppercase vem do index.css
-        'small': ['13px', { lineHeight: '1.6' }],
-        'label': ['11px', { lineHeight: '1.4',  letterSpacing: '0.15em' }],
+        'body':  ['16px',     { lineHeight: '1.5', fontWeight: '400' }],
+        'small': ['13px',     { lineHeight: '1.2' }],
+        'micro': ['10px',     { lineHeight: '1.0'}],
       },
 
       fontWeight: {

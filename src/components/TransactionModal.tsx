@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Category, Transaction, TransactionType } from '../types'
+import { maskMoneyInput, parseMoney } from '../utils/money'
 
 interface Props {
   open: boolean
@@ -15,6 +16,18 @@ interface Props {
   initial?: Transaction | null
 }
 
+
+const typeStyles: Record<TransactionType, { active: string; idle: string }> = {
+  income: {
+    active: 'bg-olive border-olive text-white',
+    idle: 'bg-transparent border-olive text-olive hover:bg-olive/10',
+  },
+  expense: {
+    active: 'bg-rust border-rust text-white',
+    idle: 'bg-transparent border-rust text-rust hover:bg-rust/10',
+  },
+}
+
 export function TransactionModal({ open, onClose, onSave, categories, initial }: Props) {
   const [type, setType] = useState<TransactionType>('expense')
   const [amount, setAmount] = useState('')
@@ -27,7 +40,7 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
   useEffect(() => {
     if (initial) {
       setType(initial.type)
-      setAmount(String(initial.amount))
+      setAmount(maskMoneyInput(String(initial.amount)))
       setDescription(initial.description ?? '')
       setDate(initial.date)
       setCategoryId(initial.category_id ?? '')
@@ -47,7 +60,7 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
     e.preventDefault()
     setError('')
 
-    const parsed = parseFloat(amount.replace(',', '.'))
+    const parsed = parseMoney(amount)
     if (isNaN(parsed) || parsed <= 0) {
       setError('Informe um valor válido.')
       return
@@ -74,17 +87,19 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 
+      bg-black/40 backdrop-blur-sm"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-surface w-full max-w-md rounded shadow-xl p-6">
+      <div className="bg-white w-full max-w-md rounded-3xl shadow-xl py-8 px-8">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-semibold text-text-primary">
+          <h2 className="font-semibold text-text-primary">
             {initial ? 'Editar transação' : 'Nova transação'}
           </h2>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-border/40 text-text-secondary transition-colors"
+            className="w-8 h-8 flex items-center justify-center
+            rounded-full hover:bg-border/40 text-text-secondary transition-colors"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
@@ -98,36 +113,66 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
                 key={t}
                 type="button"
                 onClick={() => { setType(t); setCategoryId('') }}
-                className={`flex-1 py-2 rounded text-sm font-medium transition-colors border ${
-                  type === t
-                    ? t === 'income'
-                      ? 'bg-income text-brand-brown border-income'
-                      : 'bg-expense text-white border-expense'
-                    : 'bg-transparent text-text-secondary border-border hover:border-text-secondary'
+                aria-pressed={type === t}
+                className={`flex-1 py-2 rounded font-medium border transition-colors ${
+                  type === t ? typeStyles[t].active : typeStyles[t].idle
                 }`}
               >
-                {t === 'income' ? 'Entrada' : 'Saída'}
+                {t === 'income' ? 'Nova Entrada' : 'Nova Despesa'}
               </button>
             ))}
           </div>
 
           {/* Amount */}
           <div>
-            <label className="block text-sm text-text-secondary mb-1">Valor (R$)</label>
+            <label className="block text-text-secondary mb-1">Valor (R$)</label>
             <input
               type="text"
               inputMode="decimal"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => setAmount(maskMoneyInput(e.target.value))}
               placeholder="0,00"
-              className="w-full border border-border rounded px-4 py-2.5 text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30"
+              className="w-full border border-border rounded 
+              px-4 py-3 text-text-primary focus:outline-none
+              focus:ring-2 focus:ring-income/30"
+              required
+            />
+          </div>
+
+          {/* Category */}
+          <div>
+            <label className="block font-medium mb-1">Categoria</label>
+            <select
+              value={categoryId}
+              onChange={(e) => setCategoryId(e.target.value)}
+              className="w-full border rounded
+              px-4 py-3 text-brown focus:outline-none
+              focus:ring-2 focus:ring-income/30"
+            >
+              <option value="">Sem categoria</option>
+              {filteredCategories.map((c) => (
+                <option key={c.id} value={c.id}>{c.name}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Date */}
+          <div>
+            <label className="block font-medium mb-1">Data</label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="w-full border border-border rounded
+              px-4 py-2.5 text-text-primary focus:outline-none
+              focus:ring-2 focus:ring-income/30"
               required
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm text-text-secondary mb-1">Descrição</label>
+            <label className="block font-medium mb-1">Descrição</label>
             <input
               type="text"
               value={description}
@@ -137,39 +182,13 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
             />
           </div>
 
-          {/* Date */}
-          <div>
-            <label className="block text-sm text-text-secondary mb-1">Data</label>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="w-full border border-border rounded px-4 py-2.5 text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30"
-              required
-            />
-          </div>
-
-          {/* Category */}
-          <div>
-            <label className="block text-sm text-text-secondary mb-1">Categoria</label>
-            <select
-              value={categoryId}
-              onChange={(e) => setCategoryId(e.target.value)}
-              className="w-full border border-border rounded px-4 py-2.5 text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30"
-            >
-              <option value="">Sem categoria</option>
-              {filteredCategories.map((c) => (
-                <option key={c.id} value={c.id}>{c.name}</option>
-              ))}
-            </select>
-          </div>
-
-          {error && <p className="text-expense text-sm">{error}</p>}
+          {error && <p className="text-expense">{error}</p>}
 
           <button
             type="submit"
             disabled={saving}
-            className="w-full py-3 rounded font-medium text-brand-brown bg-income hover:bg-income/90 transition-colors disabled:opacity-50"
+            className="w-full py-3 rounded font-medium text-white
+            bg-olive hover:bg-olive/90 transition-colors disabled:opacity-50"
           >
             {saving ? 'Salvando...' : 'Salvar'}
           </button>

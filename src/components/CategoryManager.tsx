@@ -39,7 +39,7 @@ function IconPicker({
         <button
           type="button"
           onClick={onClear}
-          className="mt-2 text-xs text-text-secondary underline"
+          className="mt-2 text-small text-text-secondary underline"
         >
           Remover ícone
         </button>
@@ -110,7 +110,7 @@ export function CategoryManager({ categories, onAdd, onDelete, onUpdate }: Props
 
   return (
     <div>
-      <h2 className="text-lg font-semibold text-text-primary mb-4">Categorias</h2>
+      <h2 className="font-semibold text-text-primary mb-4">Categorias</h2>
 
       {/* Add form */}
       <form onSubmit={handleAdd} className="mb-6">
@@ -118,7 +118,7 @@ export function CategoryManager({ categories, onAdd, onDelete, onUpdate }: Props
           <select
             value={type}
             onChange={(e) => setType(e.target.value as TransactionType)}
-            className="border border-border rounded px-3 py-2 text-sm text-text-primary bg-surface focus:outline-none focus:ring-2 focus:ring-income/30"
+            className="border border-border rounded px-3 py-2 text-text-primary bg-surface focus:outline-none focus:ring-2 focus:ring-income/30"
           >
             <option value="expense">Saída</option>
             <option value="income">Entrada</option>
@@ -138,13 +138,13 @@ export function CategoryManager({ categories, onAdd, onDelete, onUpdate }: Props
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Nome da categoria"
-            className="flex-1 border border-border rounded px-4 py-2 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30"
+            className="flex-1 border border-border rounded px-4 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30"
           />
 
           <button
             type="submit"
             disabled={saving || !name.trim()}
-            className="px-4 py-2 rounded text-sm font-medium text-white bg-income hover:bg-income/90 disabled:opacity-50 transition-colors"
+            className="px-4 py-2 rounded font-medium text-white bg-income hover:bg-income/90 disabled:opacity-50 transition-colors"
           >
             {saving ? '...' : 'Adicionar'}
           </button>
@@ -159,16 +159,16 @@ export function CategoryManager({ categories, onAdd, onDelete, onUpdate }: Props
         )}
       </form>
 
-      {error && <p className="text-expense text-sm mb-4">{error}</p>}
+      {error && <p className="text-expense mb-4">{error}</p>}
 
       {[
         { label: 'Entradas', items: income, color: 'text-income' },
         { label: 'Saídas', items: expense, color: 'text-expense' },
       ].map(({ label, items, color }) => (
         <div key={label} className="mb-6">
-          <h3 className={`text-xs uppercase tracking-widest font-medium mb-2 ${color}`}>{label}</h3>
+          <h3 className={`text-small uppercase tracking-widest font-medium mb-2 ${color}`}>{label}</h3>
           {items.length === 0 ? (
-            <p className="text-sm text-text-secondary py-3">Nenhuma categoria.</p>
+            <p className="text-text-secondary py-3">Nenhuma categoria.</p>
           ) : (
             <ul>
               {items.map((c) => (
@@ -200,7 +200,7 @@ export function CategoryManager({ categories, onAdd, onDelete, onUpdate }: Props
                             if (e.key === 'Enter') handleUpdate(c.id)
                             if (e.key === 'Escape') cancelEdit()
                           }}
-                          className="w-full border border-border rounded px-3 py-1.5 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30"
+                          className="w-full border border-border rounded px-3 py-1.5 text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30"
                         />
                         {showEditIconPicker && (
                           <div className="absolute z-10 w-72 mt-1">
@@ -217,14 +217,14 @@ export function CategoryManager({ categories, onAdd, onDelete, onUpdate }: Props
                         type="button"
                         onClick={() => handleUpdate(c.id)}
                         disabled={editSaving || !editName.trim()}
-                        className="px-3 py-1.5 rounded text-xs font-medium text-white bg-income hover:bg-income/90 disabled:opacity-50 transition-colors shrink-0"
+                        className="px-3 py-1.5 rounded text-small font-medium text-white bg-income hover:bg-income/90 disabled:opacity-50 transition-colors shrink-0"
                       >
                         {editSaving ? '...' : 'Salvar'}
                       </button>
                       <button
                         type="button"
                         onClick={cancelEdit}
-                        className="text-text-secondary hover:text-text-primary transition-colors text-xs shrink-0"
+                        className="text-text-secondary hover:text-text-primary transition-colors text-small shrink-0"
                       >
                         Cancelar
                       </button>
@@ -234,7 +234,7 @@ export function CategoryManager({ categories, onAdd, onDelete, onUpdate }: Props
                       <div className="w-7 h-7 flex items-center justify-center shrink-0">
                         <CategoryIcon name={c.icon} size={16} className="text-text-secondary" />
                       </div>
-                      <span className="flex-1 text-sm text-text-primary">{c.name}</span>
+                      <span className="flex-1 text-text-primary">{c.name}</span>
                       <button
                         onClick={() => startEdit(c)}
                         className="text-text-secondary hover:text-text-primary transition-colors"
