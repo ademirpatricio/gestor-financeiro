@@ -15,7 +15,8 @@ export function Sidebar({ view, onChangeView }: Props) {
 
   return (
     <aside
-      className="w-56 shrink-0 flex flex-col justify-between py-8 px-5 h-screen sticky top-0 overflow-y-auto"
+      className="w-56 shrink-0 flex flex-col justify-between py-8 px-5
+      h-screen sticky top-0 overflow-y-auto"
       style={{ backgroundColor: '#2D1F17' }}
     >
       <div>

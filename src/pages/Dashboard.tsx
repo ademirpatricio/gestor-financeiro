@@ -1,99 +1,34 @@
-import { useState } from 'react'
-import { CategoryManager } from '../components/CategoryManager'
-import { Settings } from '../components/Settings'
-import { Sidebar } from '../components/Sidebar'
-import { SummaryCards } from '../components/SummaryCards'
-import { TransactionList } from '../components/TransactionList'
 import { TransactionModal } from '../components/TransactionModal'
-import { useAuth } from '../hooks/useAuth'
-import { useCategories } from '../hooks/useCategories'
-import { useTransactions } from '../hooks/useTransactions'
-import type { Transaction } from '../types'
+import { useDashboard } from '../hooks/useDashboard'
+import { useMediaQuery } from '../hooks/useMediaQuery'
+import { DashboardDesktop } from './dashboard/DashboardDesktop'
+import { DashboardMobile } from './dashboard/DashboardMobile'
 
-type View = 'dashboard' | 'categories' | 'settings'
+// 1024px (lg) e não 768px (md): com a sidebar, a tabela não cabe em tablet na vertical.
+const DESKTOP_QUERY = '(min-width: 1024px)'
 
-function greeting() {
-  const h = new Date().getHours()
-  if (h < 12) return 'Bom dia'
-  if (h < 18) return 'Boa tarde'
-  return 'Boa noite'
-}
-
+/**
+ * Página do dashboard. Só escolhe qual tela mostrar.
+ * Estado e lógica moram no useDashboard, então girar o celular ou
+ * redimensionar a janela não perde mês, filtro nem ordenação.
+ */
 export function Dashboard() {
-  const { session } = useAuth()
-  const { transactions, loading, addTransaction, updateTransaction, deleteTransaction, deleteAllTransactions } = useTransactions()
-  const { categories, addCategory, deleteCategory, updateCategory } = useCategories()
-
-  const [view, setView] = useState<View>('dashboard')
-  const [modalOpen, setModalOpen] = useState(false)
-  const [editing, setEditing] = useState<Transaction | null>(null)
-
-  const name = (session?.user.user_metadata?.name as string | undefined)?.trim() || (session?.user.email?.split('@')[0] ?? '')
-
-  function openAdd() { setEditing(null); setModalOpen(true) }
-  function openEdit(t: Transaction) { setEditing(t); setModalOpen(true) }
-
-  async function handleSave(payload: Parameters<typeof addTransaction>[0]) {
-    if (editing) await updateTransaction(editing.id, payload)
-    else await addTransaction(payload)
-  }
-
-  async function handleDelete(id: string) {
-    if (!window.confirm('Excluir esta transação?')) return
-    await deleteTransaction(id)
-  }
+  const dashboard = useDashboard()
+  const isDesktop = useMediaQuery(DESKTOP_QUERY)
 
   return (
-    <div className="flex min-h-screen">
-      <Sidebar view={view} onChangeView={setView} />
-
-      <main className="flex-1 p-8 overflow-auto bg-white">
-        {view === 'dashboard' ? (
-          <>
-            {/* Header */}
-            <div className="flex items-start justify-between mb-8">
-              <div>
-                <p className="text-small uppercase tracking-widest text-text-secondary mb-4">
-                  {new Date().toLocaleDateString('pt-BR', 
-                    { weekday: 'long', day: 'numeric', month: 'long' })}
-                </p>
-                <h4 className="font-bold text-h4">
-                  {greeting()}, <span className="text-rust">{name}.</span>
-                </h4>
-              </div>
-              <button
-                onClick={openAdd}
-                className="flex items-center gap-2 px-5 py-3 rounded bg-olive
-                font-medium text-white shadow-sm transition-all hover:opacity-90"
-              >
-                <span>+</span> Nova transação
-              </button>
-            </div>
-
-            <SummaryCards transactions={transactions} />
-
-            {loading ? (
-              <div className="flex justify-center py-16">
-                <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#8A9B6A', borderTopColor: 'transparent' }} />
-              </div>
-            ) : (
-              <TransactionList transactions={transactions} onEdit={openEdit} onDelete={handleDelete} />
-            )}
-          </>
-        ) : view === 'settings' ? (
-          <Settings onResetAll={deleteAllTransactions} />
-        ) : (
-          <CategoryManager categories={categories} onAdd={addCategory} onDelete={deleteCategory} onUpdate={updateCategory} />
-        )}
-      </main>
+    <>
+      {isDesktop
+        ? <DashboardDesktop dashboard={dashboard} />
+        : <DashboardMobile dashboard={dashboard} />}
 
       <TransactionModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onSave={handleSave}
-        categories={categories}
-        initial={editing}
+        open={dashboard.modalOpen}
+        onClose={dashboard.closeModal}
+        onSave={dashboard.handleSave}
+        categories={dashboard.categories}
+        initial={dashboard.editing}
       />
-    </div>
+    </>
   )
 }

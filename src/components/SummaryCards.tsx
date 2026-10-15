@@ -15,12 +15,13 @@ export function SummaryCards({ transactions }: Props) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-      {/* Saldo */}
+      
+      {/* Saldo ============================================= */}
       <div className="bg-white rounded py-5 px-8 shadow-sm border border-border relative overflow-hidden">
         <div className="absolute top-0 left-0 w-2 h-full rounded-l bg-blue"/>
         <div className="flex items-start justify-between mb-3">
           <p className="text-small uppercase font-medium">Saldo atual</p>
-          <span className="text-blue opacity-70">
+          <span className="text-blue opacity-70 hidden md:block">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
@@ -32,9 +33,9 @@ export function SummaryCards({ transactions }: Props) {
         <p className="text-small text-brown_light mt-1">
           {balance >= 0 ? 'Você está no positivo' : 'Atenção: saldo negativo'}
         </p>
-      </div>
+      </div>{/* ============================================= */}
 
-      {/* Entradas */}
+      {/* Entradas ============================================= */}
       <div className="bg-white rounded py-5 px-8 shadow-sm border border-border relative overflow-hidden">
         <div className="absolute top-0 left-0 w-2 h-full rounded-l bg-olive"/>
         <div className="flex items-start justify-between mb-3">
@@ -45,13 +46,13 @@ export function SummaryCards({ transactions }: Props) {
             </svg>
           </span>
         </div>
-        <p className="text-h4 font-bold text-olive">{fmt(income)}</p>
+        <p className="text-h4 font-bold text-olive ">{fmt(income)}</p>
         <p className="text-small text-brown_light mt-1">
           {transactions.filter((t) => t.type === 'income').length} transaç{transactions.filter((t) => t.type === 'income').length === 1 ? 'ão' : 'ões'}
         </p>
-      </div>
+      </div>{/* ============================================= */}
 
-      {/* Saídas */}
+      {/* Saídas ============================================= */}
       <div className="bg-white rounded py-5 px-8 shadow-sm border border-border relative overflow-hidden">
         <div className="absolute top-0 left-0 w-2 h-full rounded-l bg-rust"/>
         <div className="flex items-start justify-between mb-3">
@@ -66,7 +67,8 @@ export function SummaryCards({ transactions }: Props) {
         <p className="text-small text-brown_light mt-1">
           {transactions.filter((t) => t.type === 'expense').length} transaç{transactions.filter((t) => t.type === 'expense').length === 1 ? 'ão' : 'ões'}
         </p>
-      </div>
+      </div>{/* ============================================= */}
+
     </div>
   )
 }
