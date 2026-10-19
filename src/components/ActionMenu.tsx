@@ -38,7 +38,7 @@ export function ActionMenu({ label, onEdit, onDelete }: Props) {
         aria-label={`Ações de ${label}`}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="w-11 h-11 flex items-center justify-center rounded text-salmon hover:bg-brown_light/10 transition-colors"
+        className="w-[44px] h-[44px] flex items-center justify-center rounded text-brown/60 hover:bg-brown_light/10 transition-colors"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
           <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
@@ -48,7 +48,7 @@ export function ActionMenu({ label, onEdit, onDelete }: Props) {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-full mt-1 z-20 w-36 py-1 rounded bg-white shadow-lg border border-brown_light/20"
+          className="absolute right-0 top-full mt-1 z-20 w-[144px] py-[4px] rounded bg-white shadow-lg border border-brown_light/20"
         >
           <button
             role="menuitem"

@@ -22,7 +22,7 @@ export function Sidebar({ view, onChangeView }: Props) {
       <div>
         {/* Logo */}
         <div className="mb-10 px-1">
-          <img src="/logo-dark.svg" alt="Grana" className="h-10 w-auto" />
+          <img src="/logo-dark.svg" alt="Grana" className="h-10 w-auto hidden md:block" />
         </div>
 
         {/* Nav */}

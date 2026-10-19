@@ -15,7 +15,7 @@ interface Props {
 // Mesma grade no cabeçalho e nas linhas, para as colunas não desalinharem.
 const GRID = '120px 1fr 180px 120px 80px'
 
-/** Versão desktop da lista: tabela. Para celular use TransactionCards. */
+/** Versão desktop da lista: tabela. Para celular use TransactionRows. */
 export function TransactionTable({ transactions, sort, onSortChange, onEdit, onDelete }: Props) {
   if (transactions.length === 0) return <TransactionsEmpty />
 
