@@ -18,10 +18,10 @@ interface Props {
 
 /** "este mês" só vale para o mês atual. Nos outros, o título diz qual é. */
 function panelTitle(month: MonthKey) {
-  if (month === currentMonthKey()) return 'Para onde foi sua grana este mês'
+  if (month === currentMonthKey()) return 'Onde foi parar a sua grana este mês:'
   const year = monthYear(month)
   const suffix = year === monthYear(currentMonthKey()) ? '' : ` de ${year}`
-  return `Para onde foi sua grana em ${monthName(month).toLowerCase()}${suffix}`
+  return `Onde foi parar a sua grana em ${monthName(month).toLowerCase()}${suffix}`
 }
 
 /** Tela de gráficos: uma rosca para as saídas e outra para as entradas do mês. */
@@ -41,7 +41,7 @@ export function ChartsView({ month, onPrev, onNext, transactions, loading }: Pro
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="grid gap-[24px] lg:grid-cols-2">
+        <div className="flex flex-col gap-[24px]">
           <CategoryDonut
             key={`expense-${month}`}
             title="Saídas"

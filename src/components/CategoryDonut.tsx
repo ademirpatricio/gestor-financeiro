@@ -26,7 +26,7 @@ const PALETTE = [
 ]
 const OTHERS_COLOR = { stroke: 'stroke-brown_light', bg: 'bg-brown_light' }
 
-// Medidas do desenho (viewBox 120 x 120). O furo do meio fica com uns 143px na tela.
+// Medidas do desenho (viewBox 120 x 120). O furo do meio fica com uns 143px no mobile e 250px no desktop grande.
 const CENTER = 60
 const RADIUS = 48
 const STROKE = 18
@@ -69,7 +69,7 @@ export function CategoryDonut({ title, tone, data, emptyText }: Props) {
   return (
     <section
       aria-label={title}
-      className="rounded border border-brown_light/30 bg-white p-[24px] shadow-sm"
+      className="rounded border border-brown_light/30 bg-white py-12 px-16 shadow-sm"
     >
       <div className="flex items-baseline justify-between gap-[16px]">
         <h3 className={`text-h5 font-bold ${titleColor}`}>{title}</h3>
@@ -77,10 +77,11 @@ export function CategoryDonut({ title, tone, data, emptyText }: Props) {
       </div>
 
       {!top ? (
-        <p className="py-[48px] text-center text-brown/80">{emptyText}</p>
+        <p className="py-[80px] text-center text-brown/80">{emptyText}</p>
       ) : (
-        <div className="mt-[24px] flex flex-col items-center gap-[24px]">
-          <div className="relative h-[220px] w-[220px] shrink-0">
+        <div className="mt-[24px] flex flex-col items-center gap-[24px] md:flex-row md:items-start md:gap-[40px]">
+          {/* Coluna da esquerda (rosca). Tamanho fixo: 220px no celular, 300px no md e 380px no lg. */}
+          <div className="relative h-[220px] w-[220px] shrink-0 md:h-[350px] md:w-[350px] lg:h-[450px] lg:w-[450px]">
             <svg
               viewBox="0 0 120 120"
               role="img"
@@ -111,7 +112,10 @@ export function CategoryDonut({ title, tone, data, emptyText }: Props) {
             </div>
           </div>
 
-          <ul className="w-full space-y-[12px]">
+          {/* Coluna da direita (legenda). Não tem largura fixa: o "md:flex-1" faz ela ocupar só o que sobra
+              ao lado da rosca. Para deixá-la mais estreita, aumente a rosca (h/w acima).
+              Para travar a largura, troque "md:flex-1" por algo como "md:w-[360px] md:flex-none". */}
+          <ul className="w-full space-y-[12px] md:min-w-0 md:flex-1">
             {arcs.map(({ slice, color }) => {
               const open = openKey === slice.key
               const panelId = `${idBase}-${slice.key}`
