@@ -32,12 +32,10 @@ export function Login() {
         {/* Logo — centralizado vertical e horizontalmente */}
         <div className="flex-1 flex flex-col items-center justify-center">
           <img src="/logo-dark.svg" alt="Grana" className="h-36 w-auto mb-12" />
-          <p className="text-brown_light text-left max-w-[480px] hidden"> 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-            consequat. Duis aute irure dolor. 
-            <span className="text-rust font-bold"> Pequenas escolhas e grandes conquistas.</span>
+          <p className="text-brown_light text-center max-w-[480px]">
+            Registre o que entra e o que sai, organize por categoria e veja o seu mês num só lugar.
+            Sem planilha complicada e sem susto.
+            <span className="text-rust font-bold"> Pequenas escolhas geram grandes conquistas.</span>
           </p>
         </div>
 
@@ -94,7 +92,7 @@ export function Login() {
           <img src="/logo-primary.svg" alt="Grana" className="h-20 w-auto lg:hidden" />
 
           <h3 className="text-h3 font-bold text-brown_dark">
-            Bem vindo ao <span className="text-terracotta">Grana</span>
+            Bem-vindo ao <span className="text-terracotta">Grana</span>
           </h3>
           <p className="text-brown_light">
             Entre com sua conta para continuar cuidando da sua vida financeira com a gente.

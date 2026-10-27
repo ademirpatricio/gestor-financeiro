@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { X } from 'lucide-react'
 import { Sidebar } from './Sidebar'
 
 type View = 'dashboard' | 'categories' | 'settings'
@@ -36,9 +37,7 @@ export function MobileMenu({ open, onClose, view, onChangeView }: Props) {
           aria-label="Fechar menu"
           className="absolute top-4 right-3 w-[44px] h-[44px] flex items-center justify-center rounded text-brown_light hover:text-white"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
+          <X size={20} strokeWidth={2} />
         </button>
       </div>
     </div>

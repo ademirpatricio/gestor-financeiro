@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { EllipsisVertical } from 'lucide-react'
 
 interface Props {
   label: string
@@ -40,9 +41,7 @@ export function ActionMenu({ label, onEdit, onDelete }: Props) {
         aria-expanded={open}
         className="w-[44px] h-[44px] flex items-center justify-center rounded text-brown/60 hover:bg-brown_light/10 transition-colors"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
-        </svg>
+        <EllipsisVertical size={18} strokeWidth={2} />
       </button>
 
       {open && (

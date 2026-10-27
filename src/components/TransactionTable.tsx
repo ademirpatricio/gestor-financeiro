@@ -1,3 +1,4 @@
+import { ChevronDown, SquarePen, Trash2 } from 'lucide-react'
 import { CategoryIcon } from '../utils/categoryIcons'
 import { fmtCurrency, fmtDate } from '../utils/format'
 import type { SortOption, Transaction } from '../types'
@@ -27,9 +28,7 @@ export function TransactionTable({ transactions, sort, onSortChange, onEdit, onD
         <span className="flex items-center gap-1 cursor-pointer select-none"
           onClick={() => onSortChange(sort === 'date_desc' ? 'date_asc' : 'date_desc')}>
           Data
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <ChevronDown size={10} strokeWidth={2.5} />
         </span>
         <span>Descrição</span>
         <span>Categoria</span>
@@ -85,22 +84,14 @@ export function TransactionTable({ transactions, sort, onSortChange, onEdit, onD
                   className="p-1.5 rounded text-text-secondary hover:text-text-primary hover:bg-border/40 transition-colors"
                   title="Editar"
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                  </svg>
+                  <SquarePen size={14} strokeWidth={2} />
                 </button>
                 <button
                   onClick={() => onDelete(t.id)}
                   className="p-1.5 rounded text-text-secondary hover:text-expense hover:bg-expense/10 transition-colors"
                   title="Excluir"
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="3 6 5 6 21 6"/>
-                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                    <path d="M10 11v6"/><path d="M14 11v6"/>
-                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
-                  </svg>
+                  <Trash2 size={14} strokeWidth={2} />
                 </button>
               </div>
             </li>

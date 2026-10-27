@@ -44,6 +44,13 @@ async function seedDefaultsOnce(existingCount: number): Promise<boolean> {
   return false
 }
 
+// O banco não deixa a mesma pessoa ter duas categorias com o mesmo nome e tipo
+// (erro 23505). Aqui vira uma mensagem no tom do Grana.
+function categoryError(error: { code?: string; message: string }) {
+  if (error.code === '23505') return new Error('Essa categoria já existe por aqui. Que tal outro nome?')
+  return error
+}
+
 export function useCategories() {
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
@@ -84,7 +91,7 @@ export function useCategories() {
       user_id: user.id,
     })
 
-    if (error) throw error
+    if (error) throw categoryError(error)
     await fetchCategories()
   }
 
@@ -99,7 +106,7 @@ export function useCategories() {
       .from('categories')
       .update({ name, icon })
       .eq('id', id)
-    if (error) throw error
+    if (error) throw categoryError(error)
     await fetchCategories()
   }
 

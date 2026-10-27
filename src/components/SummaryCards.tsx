@@ -1,3 +1,4 @@
+import { ArrowDown, ArrowUp, DollarSign } from 'lucide-react'
 import type { Transaction } from '../types'
 
 interface Props {
@@ -22,9 +23,7 @@ export function SummaryCards({ transactions }: Props) {
         <div className="flex items-start justify-between mb-3">
           <p className="text-small uppercase font-medium">Saldo atual</p>
           <span className="text-blue opacity-70 hidden md:block">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-            </svg>
+            <DollarSign size={16} strokeWidth={2} />
           </span>
         </div>
         <p className="text-h4 font-bold text-blue">
@@ -41,9 +40,7 @@ export function SummaryCards({ transactions }: Props) {
         <div className="flex items-start justify-between mb-3">
           <p className="text-small uppercase font-medium">Entradas</p>
           <span className="text-olive opacity-70">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
-            </svg>
+            <ArrowUp size={16} strokeWidth={2.5} />
           </span>
         </div>
         <p className="text-h4 font-bold text-olive ">{fmt(income)}</p>
@@ -58,9 +55,7 @@ export function SummaryCards({ transactions }: Props) {
         <div className="flex items-start justify-between mb-3">
           <p className="text-small uppercase font-medium">Saídas</p>
           <span className="text-rust opacity-70">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
-            </svg>
+            <ArrowDown size={16} strokeWidth={2.5} />
           </span>
         </div>
         <p className="text-h4 font-bold text-rust">{fmt(expense)}</p>

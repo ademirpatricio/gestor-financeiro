@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ArrowDownLeft, ArrowUpRight, Menu, Search } from 'lucide-react'
 import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { MobileMenu } from '../../components/MobileMenu'
 import { MonthSwitcher } from '../../components/MonthSwitcher'
@@ -16,11 +17,7 @@ function FlowBadge({ type }: { type: 'income' | 'expense' }) {
       aria-hidden="true"
       className={`w-[20px] h-[20px] rounded-full flex items-center justify-center shrink-0 text-white ${isIncome ? 'bg-olive' : 'bg-rust'}`}
     >
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        {isIncome
-          ? <><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></>
-          : <><line x1="17" y1="7" x2="7" y2="17"/><polyline points="17 17 7 17 7 7"/></>}
-      </svg>
+      {isIncome ? <ArrowUpRight size={12} strokeWidth={3} /> : <ArrowDownLeft size={12} strokeWidth={3} />}
     </span>
   )
 }
@@ -53,9 +50,7 @@ export function DashboardMobile({ dashboard: d }: { dashboard: DashboardState })
             aria-label="Abrir menu"
             className="w-[44px] h-[44px] flex items-center justify-center justify-self-end"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
+            <Menu size={28} strokeWidth={3} />
           </button>
         </div>
       </header>
@@ -132,9 +127,7 @@ export function DashboardMobile({ dashboard: d }: { dashboard: DashboardState })
                 aria-label="Buscar transações"
                 className="w-[62px] h-[60px] shrink-0 flex items-center justify-center rounded bg-olive text-white transition-all hover:opacity-90"
               >
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
+                <Search size={26} strokeWidth={2.5} />
               </button>
             </div>
           </>

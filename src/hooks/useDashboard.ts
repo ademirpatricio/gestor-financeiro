@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { FilterType, SortOption, Transaction } from '../types'
-import { currentMonthKey, isInMonth, shiftMonth } from '../utils/month'
+import { currentMonthKey, shiftMonth } from '../utils/month'
 import { useAuth } from './useAuth'
 import { useCategories } from './useCategories'
 import { useTransactions } from './useTransactions'
@@ -28,14 +28,15 @@ function sortTransactions(list: Transaction[], sort: SortOption) {
  */
 export function useDashboard() {
   const { session } = useAuth()
+  const [month, setMonth] = useState(currentMonthKey)
+  // O hook já traz só o mês escolhido.
   const {
-    transactions, loading,
+    transactions: monthTransactions, loading,
     addTransaction, updateTransaction, deleteTransaction, deleteAllTransactions,
-  } = useTransactions()
+  } = useTransactions(month)
   const { categories, addCategory, deleteCategory, updateCategory } = useCategories()
 
   const [view, setView] = useState<DashboardView>('dashboard')
-  const [month, setMonth] = useState(currentMonthKey)
   const [filter, setFilter] = useState<FilterType>('all')
   const [sort, setSort] = useState<SortOption>('date_desc')
   const [modalOpen, setModalOpen] = useState(false)
@@ -44,12 +45,6 @@ export function useDashboard() {
   const name =
     (session?.user.user_metadata?.name as string | undefined)?.trim() ||
     (session?.user.email?.split('@')[0] ?? '')
-
-  // Tudo do mês escolhido. Os totais olham para esta lista.
-  const monthTransactions = useMemo(
-    () => transactions.filter((t) => isInMonth(t.date, month)),
-    [transactions, month],
-  )
 
   const summary = useMemo(() => {
     const s = { income: 0, expense: 0, incomeCount: 0, expenseCount: 0 }

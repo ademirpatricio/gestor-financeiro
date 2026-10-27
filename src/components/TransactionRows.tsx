@@ -1,3 +1,4 @@
+import { ArrowDownLeft, ArrowUpRight } from 'lucide-react'
 import type { Transaction } from '../types'
 import { CategoryIcon } from '../utils/categoryIcons'
 import { fmtCurrency, fmtDate } from '../utils/format'
@@ -45,11 +46,7 @@ export function TransactionRows({ transactions, onEdit, onDelete }: Props) {
             {/* Valor: seta + cor mostram se é entrada ou saída */}
             <div className={`flex items-center gap-[6px] font-medium
               whitespace-nowrap ${isIncome ? 'text-olive' : 'text-rust'}`}>
-              <svg width="12" height="12" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                {isIncome
-                  ? <><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></>
-                  : <><line x1="17" y1="7" x2="7" y2="17"/><polyline points="17 17 7 17 7 7"/></>}
-              </svg>
+              {isIncome ? <ArrowUpRight size={12} strokeWidth={2.5} aria-hidden="true" /> : <ArrowDownLeft size={12} strokeWidth={2.5} aria-hidden="true" />}
               <span className="sr-only">{isIncome ? 'Entrada' : 'Saída'}</span>
               {fmtCurrency(t.amount)}
             </div>

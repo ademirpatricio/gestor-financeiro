@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { MonthKey } from '../utils/month'
 import { currentMonthKey, monthName, monthYear } from '../utils/month'
 
@@ -17,9 +18,7 @@ export function MonthSwitcher({ month, onPrev, onNext }: Props) {
   return (
     <div className="flex items-center">
       <button type="button" onClick={onPrev} aria-label="Mês anterior" className={arrowBtn}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
+        <ChevronLeft size={16} strokeWidth={2.5} />
       </button>
 
       <div className="min-w-[96px] text-center" aria-live="polite">
@@ -28,9 +27,7 @@ export function MonthSwitcher({ month, onPrev, onNext }: Props) {
       </div>
 
       <button type="button" onClick={onNext} aria-label="Próximo mês" className={arrowBtn}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <ChevronRight size={16} strokeWidth={2.5} />
       </button>
     </div>
   )
