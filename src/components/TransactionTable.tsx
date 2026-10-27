@@ -49,10 +49,10 @@ export function TransactionTable({ transactions, sort, onSortChange, onEdit, onD
               style={{ gridTemplateColumns: GRID }}
             >
               {/* Data */}
-              <span className="text-text-secondary">{fmtDate(t.date)}</span>
+              <span className="text-brown/80">{fmtDate(t.date)}</span>
 
               {/* Descrição */}
-              <span className="text-text-primary font-medium truncate pr-4">
+              <span className="text-brown font-medium truncate pr-4">
                 {t.description || '—'}
               </span>
 
@@ -64,7 +64,7 @@ export function TransactionTable({ transactions, sort, onSortChange, onEdit, onD
                 >
                   <CategoryIcon name={cat?.icon ?? null} size={15} color="#fff" />
                 </div>
-                <span className="text-text-primary truncate">
+                <span className="text-brown truncate">
                   {cat?.name ?? 'Sem categoria'}
                 </span>
               </div>
@@ -81,14 +81,14 @@ export function TransactionTable({ transactions, sort, onSortChange, onEdit, onD
               <div className="flex items-center justify-end gap-1">
                 <button
                   onClick={() => onEdit(t)}
-                  className="p-1.5 rounded text-text-secondary hover:text-text-primary hover:bg-border/40 transition-colors"
+                  className="p-1.5 rounded text-brown/80 hover:text-brown hover:bg-brown_light/15 transition-colors"
                   title="Editar"
                 >
                   <SquarePen size={14} strokeWidth={2} />
                 </button>
                 <button
                   onClick={() => onDelete(t.id)}
-                  className="p-1.5 rounded text-text-secondary hover:text-expense hover:bg-expense/10 transition-colors"
+                  className="p-1.5 rounded text-brown/80 hover:text-terracotta hover:bg-terracotta/10 transition-colors"
                   title="Excluir"
                 >
                   <Trash2 size={14} strokeWidth={2} />

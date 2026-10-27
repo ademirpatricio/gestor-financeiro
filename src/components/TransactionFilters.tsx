@@ -13,7 +13,7 @@ interface Props {
 export function TransactionFilters({ filter, onFilterChange, sort, onSortChange, stacked = false }: Props) {
   return (
     <div className={stacked ? 'flex flex-col gap-3' : 'flex flex-wrap items-center justify-between gap-3 mb-4'}>
-      <div className={`flex gap-1 p-1 rounded bg-white border border-border shadow-sm ${stacked ? 'w-full' : ''}`}>
+      <div className={`flex gap-1 p-1 rounded bg-white border border-brown_light/30 shadow-sm ${stacked ? 'w-full' : ''}`}>
         {(['all', 'income', 'expense'] as FilterType[]).map((f) => (
           <button
             key={f}
@@ -34,7 +34,7 @@ export function TransactionFilters({ filter, onFilterChange, sort, onSortChange,
       <select
         value={sort}
         onChange={(e) => onSortChange(e.target.value as SortOption)}
-        className={`text-small border border-border rounded px-3 bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30 shadow-sm ${
+        className={`text-small border border-brown_light/30 rounded px-3 bg-white text-brown focus:outline-none focus:ring-2 focus:ring-olive/30 shadow-sm ${
           stacked ? 'self-start py-2.5' : 'py-2'
         }`}
       >

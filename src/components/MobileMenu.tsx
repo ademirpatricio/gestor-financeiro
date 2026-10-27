@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { X } from 'lucide-react'
 import { Sidebar } from './Sidebar'
 
-type View = 'dashboard' | 'categories' | 'settings'
+type View = 'dashboard' | 'charts' | 'categories' | 'settings'
 
 interface Props {
   open: boolean

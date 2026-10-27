@@ -18,7 +18,7 @@ export function SummaryCards({ transactions }: Props) {
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
       
       {/* Saldo ============================================= */}
-      <div className="bg-white rounded py-5 px-8 shadow-sm border border-border relative overflow-hidden">
+      <div className="bg-white rounded py-5 px-8 shadow-sm border border-brown_light/30 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-2 h-full rounded-l bg-blue"/>
         <div className="flex items-start justify-between mb-3">
           <p className="text-small uppercase font-medium">Saldo atual</p>
@@ -35,7 +35,7 @@ export function SummaryCards({ transactions }: Props) {
       </div>{/* ============================================= */}
 
       {/* Entradas ============================================= */}
-      <div className="bg-white rounded py-5 px-8 shadow-sm border border-border relative overflow-hidden">
+      <div className="bg-white rounded py-5 px-8 shadow-sm border border-brown_light/30 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-2 h-full rounded-l bg-olive"/>
         <div className="flex items-start justify-between mb-3">
           <p className="text-small uppercase font-medium">Entradas</p>
@@ -50,7 +50,7 @@ export function SummaryCards({ transactions }: Props) {
       </div>{/* ============================================= */}
 
       {/* Saídas ============================================= */}
-      <div className="bg-white rounded py-5 px-8 shadow-sm border border-border relative overflow-hidden">
+      <div className="bg-white rounded py-5 px-8 shadow-sm border border-brown_light/30 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-2 h-full rounded-l bg-rust"/>
         <div className="flex items-start justify-between mb-3">
           <p className="text-small uppercase font-medium">Saídas</p>

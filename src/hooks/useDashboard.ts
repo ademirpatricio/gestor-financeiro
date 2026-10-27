@@ -5,7 +5,7 @@ import { useAuth } from './useAuth'
 import { useCategories } from './useCategories'
 import { useTransactions } from './useTransactions'
 
-export type DashboardView = 'dashboard' | 'categories' | 'settings'
+export type DashboardView = 'dashboard' | 'charts' | 'categories' | 'settings'
 
 type SavePayload = Parameters<ReturnType<typeof useTransactions>['addTransaction']>[0]
 

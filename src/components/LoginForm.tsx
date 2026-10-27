@@ -65,8 +65,8 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
 
       {/* Lembrar + Esqueceu */}
       <div className="flex items-center justify-between py-4">
-        <label className="flex items-center gap-2 text-text-secondary cursor-pointer select-none">
-          <input type="checkbox" className="rounded border-border accent-income" />
+        <label className="flex items-center gap-2 text-brown/80 cursor-pointer select-none">
+          <input type="checkbox" className="rounded border-brown_light/30 accent-olive" />
           Lembrar de mim
         </label>
         <a href="#" className="text-olive hover:text-olive_light hover:underline transition-colors">
@@ -74,7 +74,7 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
         </a>
       </div>
 
-      {error && <p className="text-expense">{error}</p>}
+      {error && <p className="text-terracotta">{error}</p>}
 
       <button
         type="submit"

@@ -26,7 +26,7 @@ export function DashboardDesktop({ dashboard: d }: { dashboard: DashboardState }
             {/* Header */}
             <div className="flex items-start justify-between gap-4 mb-8">
               <div>
-                <p className="text-small uppercase tracking-widest text-text-secondary mb-4">
+                <p className="text-small uppercase tracking-widest text-brown/80 mb-4">
                   {new Date().toLocaleDateString('pt-BR',
                     { weekday: 'long', day: 'numeric', month: 'long' })}
                 </p>

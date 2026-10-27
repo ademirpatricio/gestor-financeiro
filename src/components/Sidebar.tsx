@@ -1,7 +1,7 @@
-import { LayoutGrid, Settings, Tag } from 'lucide-react'
+import { ChartPie, LayoutGrid, Settings, Tag } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 
-type View = 'dashboard' | 'categories' | 'settings'
+type View = 'dashboard' | 'charts' | 'categories' | 'settings'
 
 interface Props {
   view: View
@@ -35,6 +35,14 @@ export function Sidebar({ view, onChangeView }: Props) {
             label="Dashboard"
             active={view === 'dashboard'}
             onClick={() => onChangeView('dashboard')}
+          />
+          <NavItem
+            icon={
+              <ChartPie size={16} strokeWidth={2} />
+            }
+            label="Raio-x do mês"
+            active={view === 'charts'}
+            onClick={() => onChangeView('charts')}
           />
           <NavItem
             icon={

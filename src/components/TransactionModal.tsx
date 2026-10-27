@@ -94,13 +94,13 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
     >
       <div className="bg-white w-full max-w-md rounded-3xl shadow-xl py-8 px-8">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="font-semibold text-text-primary">
+          <h2 className="font-semibold text-brown">
             {initial ? 'Editar transação' : 'Nova transação'}
           </h2>
           <button
             onClick={onClose}
             className="w-8 h-8 flex items-center justify-center
-            rounded-full hover:bg-border/40 text-text-secondary transition-colors"
+            rounded-full hover:bg-brown_light/15 text-brown/80 transition-colors"
           >
             <X size={16} strokeWidth={2} />
           </button>
@@ -126,16 +126,16 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
 
           {/* Amount */}
           <div>
-            <label className="block text-text-secondary mb-1">Valor (R$)</label>
+            <label className="block text-brown/80 mb-1">Valor (R$)</label>
             <input
               type="text"
               inputMode="decimal"
               value={amount}
               onChange={(e) => setAmount(maskMoneyInput(e.target.value))}
               placeholder="0,00"
-              className="w-full border border-border rounded 
-              px-4 py-3 text-text-primary focus:outline-none
-              focus:ring-2 focus:ring-income/30"
+              className="w-full border border-brown_light/30 rounded 
+              px-4 py-3 text-brown focus:outline-none
+              focus:ring-2 focus:ring-olive/30"
               required
             />
           </div>
@@ -148,7 +148,7 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
               onChange={(e) => setCategoryId(e.target.value)}
               className="w-full border rounded
               px-4 py-3 text-brown focus:outline-none
-              focus:ring-2 focus:ring-income/30"
+              focus:ring-2 focus:ring-olive/30"
             >
               <option value="">Sem categoria</option>
               {filteredCategories.map((c) => (
@@ -164,9 +164,9 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full border border-border rounded
-              px-4 py-2.5 text-text-primary focus:outline-none
-              focus:ring-2 focus:ring-income/30"
+              className="w-full border border-brown_light/30 rounded
+              px-4 py-2.5 text-brown focus:outline-none
+              focus:ring-2 focus:ring-olive/30"
               required
             />
           </div>
@@ -179,11 +179,11 @@ export function TransactionModal({ open, onClose, onSave, categories, initial }:
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Ex.: Aluguel, Freelance..."
-              className="w-full border border-border rounded px-4 py-2.5 text-text-primary focus:outline-none focus:ring-2 focus:ring-income/30"
+              className="w-full border border-brown_light/30 rounded px-4 py-2.5 text-brown focus:outline-none focus:ring-2 focus:ring-olive/30"
             />
           </div>
 
-          {error && <p className="text-expense">{error}</p>}
+          {error && <p className="text-terracotta">{error}</p>}
 
           <button
             type="submit"
