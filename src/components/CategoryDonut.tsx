@@ -81,7 +81,7 @@ export function CategoryDonut({ title, tone, data, emptyText }: Props) {
       ) : (
         <div className="mt-[24px] flex flex-col items-center gap-[24px] md:flex-row md:items-start md:gap-[40px]">
           {/* Coluna da esquerda (rosca). Tamanho fixo: 220px no celular, 300px no md e 380px no lg. */}
-          <div className="relative h-[220px] w-[220px] shrink-0 md:h-[350px] md:w-[350px] lg:h-[450px] lg:w-[450px]">
+          <div className="relative h-[220px] w-[220px] shrink-0 md:h-[280px] md:w-[280px] lg:h-[350px] lg:w-[350px]">
             <svg
               viewBox="0 0 120 120"
               role="img"
