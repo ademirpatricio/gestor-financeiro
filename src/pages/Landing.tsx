@@ -28,11 +28,6 @@ const sizeLg = 'px-[28px] py-[14px]'
 const sizeSm = 'px-[20px] py-[10px]'
 const primary = 'bg-olive text-white hover:brightness-90'
 const ghost = 'border border-salmon text-salmon_light hover:bg-white/10'
-// Etiqueta pequena acima dos títulos. Uma versão para fundo claro e outra para escuro.
-const pill =
-  'inline-block rounded-full border px-[14px] py-[6px] text-small font-bold uppercase tracking-[0.08em]'
-const pillLight = `${pill} border-brown_light/30 bg-white text-terracotta`
-const pillDark = `${pill} border-white/20 bg-white/10 text-salmon_light`
 
 const destaques = [
   { icone: Zap, linhas: ['Simples', 'de usar'] },
