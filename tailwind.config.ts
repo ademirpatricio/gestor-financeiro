@@ -13,6 +13,7 @@ export default {
         rust_light:   '#e6865d',
         salmon:       '#E8A898',
         salmon_light: '#f9e4e0',
+        peach:        '#F6C79E',
         brown:        '#3D2B1F',
         brown_dark:   '#2D1F17',
         brown_light:  '#8A7A70',
