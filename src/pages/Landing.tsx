@@ -14,8 +14,9 @@ import {
 } from 'lucide-react'
 import bgDark from '../assets/images/background1.png'
 import mascotCofre from '../assets/images/img1.png'
+import cofrePensando from '../assets/images/cofre-pensando.webp'
 import mascoteHero from '../assets/images/mascote-hero.webp'
-import dashboardMockup from '../assets/images/dashboard-mockup.webp'
+import celularApp from '../assets/images/celular-app.webp'
 import iconeCafe from '../assets/images/icone-cafe.webp'
 import iconeCarteira from '../assets/images/icone-carteira.webp'
 import iconeCalendario from '../assets/images/icone-calendario.webp'
@@ -132,7 +133,7 @@ const perguntas = [
   },
   {
     pergunta: 'Quem faz o Grana?',
-    resposta: 'Ademir Patrício e a Malabares MKT & TEC.',
+    resposta: 'Ademir Patrício, Thayná Aguiar e a Malabares MKT & TEC.',
   },
 ]
 
@@ -314,34 +315,38 @@ export function Landing() {
         </section>
 
         {/* ── Cofre ======================================== */}
+        {/* O Cofre encosta na borda de baixo, sem espaço embaixo. */}
         <section
           aria-labelledby="titulo-cofre"
-          className="bg-brown_dark text-white py-20 items-center bg-brown_dark bg-cover bg-center"
+          className="bg-brown_dark bg-cover bg-center pt-20 text-white"
           style={{ backgroundImage: `url(${bgDark})` }}
         >
           <div
-            className={`${container} grid items-center gap-20
-            lg:grid-cols-[260px_minmax(0,1fr)]`}
+            className={`${container} grid items-end gap-[48px] lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:gap-[64px]`}
           >
-            <Reveal>
+            <Reveal className="order-2 mx-auto w-full max-w-[440px]">
               <img
-                src={mascotCofre}
-                alt="Cofre, o porquinho mascote do Grana"
-                width={260}
-                height={260}
+                src={cofrePensando}
+                alt="Cofre, o porquinho mascote do Grana, sorrindo de olhos fechados com a mão no rosto"
+                width={880}
+                height={616}
                 loading="lazy"
-                className="h-[260px] w-[260px] rounded-full object-cover ring-4 ring-rust/60"
+                className="block h-auto w-full -scale-x-100"
               />
             </Reveal>
-            <Reveal delay={150}>
-              <h2 id="titulo-cofre" className="text-h3 font-bold mb-4">
+            <Reveal delay={150} className="order-1 lg:self-center lg:pb-[80px]">
+              <h2 id="titulo-cofre" className="mb-4 text-h3 font-bold">
                 Conheça o <span className="text-rust">Cofre</span>, seu guia por aqui.
               </h2>
-              <p className="max-w-[600px] text-xl text-salmon_light">
+              <p className="max-w-[600px] text-xl text-salmon_light mb-6">
                 O Cofre é um porquinho confiante e prático. É aquele amigo que entende de
                 dinheiro e explica sem fazer você se sentir mal. É ele quem dá o tom do
                 Grana: papo reto e sem julgamento.
               </p>
+              <Link to="https://www.instagram.com/malabaresmkt" className={`${btnBase} ${sizeLg} ${primary}`}>
+                Segue a gente no Instagram
+                <ArrowRight size={18} aria-hidden="true" />
+              </Link>
             </Reveal>
           </div>
         </section>
@@ -349,16 +354,21 @@ export function Landing() {
         {/* ── O que você encontra ======================================== */}
         <section aria-labelledby="titulo-recursos" className="bg-white py-20">
           <div
-            className={`${container} grid items-start gap-[40px] lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-[64px]`}
+            className="mx-auto grid w-full max-w-[1240px] items-center gap-[48px] px-[24px] lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-[64px]"
           >
-            <Reveal className="flex justify-center lg:justify-start">
+            {/* Celular com um círculo atrás. O círculo é só decoração. */}
+            <Reveal className="relative mx-auto h-[520px] w-full max-w-[420px]">
+              <div
+                aria-hidden="true"
+                className="absolute left-1/2 top-[90px] aspect-square w-[min(100%,415px)] -translate-x-1/2 rounded-full bg-olive_light/50"
+              />
               <img
-                src={dashboardMockup}
-                alt="Tela do Grana mostrando o saldo do mês, as entradas, as saídas e a lista de lançamentos"
-                width={406}
-                height={308}
+                src={celularApp}
+                alt="Tela do Grana no celular, com o saldo do mês, as entradas, as saídas e a lista de lançamentos"
+                width={560}
+                height={1128}
                 loading="lazy"
-                className="h-auto w-full max-w-[406px]"
+                className="absolute left-1/2 top-0 h-[520px] w-auto max-w-none -translate-x-1/2"
               />
             </Reveal>
 
@@ -366,7 +376,7 @@ export function Landing() {
               <Reveal
                 as="h2"
                 id="titulo-recursos"
-                className="mb-[48px] text-h3 font-bold text-brown_dark"
+                className="mb-[48px] max-w-[500px] text-h2 font-bold text-brown_dark"
               >
                 O que você encontra aqui no Grana
               </Reveal>
@@ -376,14 +386,14 @@ export function Landing() {
                     as="li"
                     delay={(i % 2) * 100}
                     key={titulo}
-                    className="flex items-start gap-[20px]"
+                    className="flex items-start gap-[24px]"
                   >
                     <span className="flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-full bg-salmon_light text-terracotta">
                       <Icone size={24} aria-hidden="true" />
                     </span>
                     <div>
-                      <h3 className="text-h5 font-bold text-brown_dark">{titulo}</h3>
-                      <p className="mt-[4px] text-[18px] leading-[1.4]">{texto}</p>
+                      <h3 className="text-[18px] font-bold text-brown_dark">{titulo}</h3>
+                      <p className="mt-[4px] text-body leading-[1.4]">{texto}</p>
                     </div>
                   </Reveal>
                 ))}
@@ -395,7 +405,7 @@ export function Landing() {
         {/* ── Perguntas rápidas ======================================== */}
         <section
           aria-labelledby="titulo-faq"
-          className="bg-salmon_light py-14"
+          className="bg-salmon_light/50 py-14"
         >
           <div
             className={`${container}`}
@@ -423,17 +433,19 @@ export function Landing() {
           </div>
         </section>
 
-        {/* ── Fechamento ======================================== */}
-        {/* O Cofre aparece espiando pela borda de baixo. O "overflow-hidden" corta a imagem. */}
-        <section
-          aria-labelledby="titulo-fechamento"
-          className="relative overflow-hidden bg-brown_dark text-white py-20"
-        >
+      </main>
+
+      {/* ── Fechamento e rodapé: um fundo só ── */}
+      <div
+        style={{ backgroundImage: `url(${bgDark})` }}
+        className="overflow-hidden bg-brown_dark bg-cover bg-center text-white"
+      >
+        <section aria-labelledby="titulo-fechamento" className="py-20">
           <div className={container}>
             <Reveal
               as="h2"
               id="titulo-fechamento"
-              className="text-h2 font-bold mb-8 mx-auto max-w-[520px]"
+              className="mx-auto mb-8 max-w-[520px] text-center text-h2 font-bold"
             >
               Comece pelo dia de hoje.
             </Reveal>
@@ -461,10 +473,10 @@ export function Landing() {
 
           </div>
         </section>
-      </main>
 
-      {/* ── Rodapé ── */}
-      <footer className="bg-brown_dark pb-[40px] text-center text-small text-salmon_light">
+        <footer
+          className={`${container} py-[32px] text-center text-small text-salmon_light`}
+        >
         <p>Grana. Sua vida financeira mais simples.</p>
         <p className="mt-[8px]">
           Criado por{' '}
@@ -486,7 +498,8 @@ export function Landing() {
             Malabares MKT & TEC
           </a>
         </p>
-      </footer>
+        </footer>
+      </div>
     </div>
   )
 }
