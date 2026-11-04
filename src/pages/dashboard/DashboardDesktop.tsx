@@ -47,7 +47,10 @@ export function DashboardDesktop({ dashboard: d }: { dashboard: DashboardState }
               </div>
             </div>
 
-            <SummaryCards transactions={d.monthTransactions} />
+            <SummaryCards
+              transactions={d.monthTransactions}
+              previousBalance={d.summary.previousBalance}
+            />
 
             <TransactionFilters
               filter={d.filter}

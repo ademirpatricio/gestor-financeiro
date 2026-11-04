@@ -1,18 +1,21 @@
 import { ArrowDown, ArrowUp, DollarSign } from 'lucide-react'
 import type { Transaction } from '../types'
+import { hasPrevious } from '../utils/format'
 
 interface Props {
   transactions: Transaction[]
+  // Saldo que veio dos meses anteriores. null = não foi possível buscar.
+  previousBalance: number | null
 }
 
 function fmt(value: number) {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
-export function SummaryCards({ transactions }: Props) {
+export function SummaryCards({ transactions, previousBalance }: Props) {
   const income = transactions.filter((t) => t.type === 'income').reduce((acc, t) => acc + t.amount, 0)
   const expense = transactions.filter((t) => t.type === 'expense').reduce((acc, t) => acc + t.amount, 0)
-  const balance = income - expense
+  const balance = (previousBalance ?? 0) + income - expense
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
@@ -21,7 +24,7 @@ export function SummaryCards({ transactions }: Props) {
       <div className="bg-white rounded py-5 px-8 shadow-sm border border-brown_light/30 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-2 h-full rounded-l bg-blue"/>
         <div className="flex items-start justify-between mb-3">
-          <p className="text-small uppercase font-medium">Saldo atual</p>
+          <p className="text-small uppercase font-medium">Saldo do mês</p>
           <span className="text-blue opacity-70 hidden md:block">
             <DollarSign size={16} strokeWidth={2} />
           </span>
@@ -29,6 +32,11 @@ export function SummaryCards({ transactions }: Props) {
         <p className="text-h4 font-bold text-blue">
           {fmt(balance)}
         </p>
+        {hasPrevious(previousBalance) && (
+          <p className="text-small text-brown_light mt-1">
+            Saldo anterior: {fmt(previousBalance)}
+          </p>
+        )}
         <p className="text-small text-brown_light mt-1">
           {balance >= 0 ? 'Você está no positivo' : 'Atenção: saldo negativo'}
         </p>

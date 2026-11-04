@@ -44,6 +44,9 @@ function withRow(prev: ByMonth, row: Transaction): ByMonth {
  */
 export function useTransactions(month: MonthKey) {
   const [byMonth, setByMonth] = useState<ByMonth>({})
+  // Saldo acumulado antes de cada mês visitado. undefined = ainda buscando.
+  // null = a busca falhou (a tela mostra só o saldo do mês, como antes).
+  const [openingByMonth, setOpeningByMonth] = useState<Record<MonthKey, number | null>>({})
   // Sobe a cada alteração. Se uma busca começou antes de uma alteração,
   // o resultado dela pode estar velho, então ela roda de novo.
   const changes = useRef(0)
@@ -66,13 +69,38 @@ export function useTransactions(month: MonthKey) {
     }))
   }, [])
 
+  // Soma de tudo que veio antes do mês. O cálculo é feito no banco (balance_before).
+  const loadOpening = useCallback(async (key: MonthKey): Promise<void> => {
+    const startedAt = changes.current
+    const { data, error } = await supabase.rpc('balance_before', { p_month: `${key}-01` })
+
+    if (startedAt !== changes.current) return loadOpening(key)
+
+    setOpeningByMonth((prev) => ({
+      ...prev,
+      [key]: error || data === null ? null : Number(data),
+    }))
+  }, [])
+
+  // Depois de salvar, editar ou excluir, o saldo anterior dos meses seguintes muda.
+  // Mantém o valor do mês aberto na tela, descarta os outros e busca de novo.
+  const refreshOpening = useCallback(
+    (key: MonthKey) => {
+      setOpeningByMonth((prev) => (key in prev ? { [key]: prev[key] } : {}))
+      void loadOpening(key)
+    },
+    [loadOpening],
+  )
+
   useEffect(() => {
     loadMonth(month)
-  }, [month, loadMonth])
+    loadOpening(month)
+  }, [month, loadMonth, loadOpening])
 
   const transactions = byMonth[month] ?? []
+  const openingBalance = openingByMonth[month] ?? null
   // Só mostra o spinner na primeira visita ao mês.
-  const loading = byMonth[month] === undefined
+  const loading = byMonth[month] === undefined || openingByMonth[month] === undefined
 
   async function addTransaction(payload: TransactionPayload) {
     const { data: { user } } = await supabase.auth.getUser()
@@ -87,6 +115,7 @@ export function useTransactions(month: MonthKey) {
     if (error) throw error
     changes.current++
     setByMonth((prev) => withRow(prev, data as Transaction))
+    refreshOpening(month)
   }
 
   async function updateTransaction(id: string, payload: TransactionPayload) {
@@ -101,6 +130,7 @@ export function useTransactions(month: MonthKey) {
     changes.current++
     // Tira de onde estava e coloca no mês certo (a data pode ter mudado de mês).
     setByMonth((prev) => withRow(withoutId(prev, id), data as Transaction))
+    refreshOpening(month)
   }
 
   async function deleteTransaction(id: string) {
@@ -108,6 +138,7 @@ export function useTransactions(month: MonthKey) {
     if (error) throw error
     changes.current++
     setByMonth((prev) => withoutId(prev, id))
+    refreshOpening(month)
   }
 
   async function deleteAllTransactions() {
@@ -118,10 +149,12 @@ export function useTransactions(month: MonthKey) {
     if (error) throw error
     changes.current++
     setByMonth({ [month]: [] })
+    refreshOpening(month)
   }
 
   return {
     transactions,
+    openingBalance,
     loading,
     addTransaction,
     updateTransaction,

@@ -6,7 +6,7 @@ import { MonthSwitcher } from '../../components/MonthSwitcher'
 import { TransactionFilters } from '../../components/TransactionFilters'
 import { TransactionRows } from '../../components/TransactionRows'
 import type { DashboardState } from '../../hooks/useDashboard'
-import { fmtCurrency } from '../../utils/format'
+import { fmtCurrency, hasPrevious } from '../../utils/format'
 import { ManagementView } from './ManagementView'
 
 /** Bolinha com seta que acompanha os totais de Entradas e Saídas. */
@@ -40,7 +40,12 @@ export function DashboardMobile({ dashboard: d }: { dashboard: DashboardState })
           {isDashboard ? (
             <div className="text-center">
               <p className="text-h4 font-medium mt-2">{fmtCurrency(d.summary.balance)}</p>
-              <p className="text-small text-white/60 mt-1">Saldo atual</p>
+              <p className="text-small text-white/60 mt-1">Saldo do mês</p>
+              {hasPrevious(d.summary.previousBalance) && (
+                <p className="text-small text-white/60">
+                  Anterior: {fmtCurrency(d.summary.previousBalance)}
+                </p>
+              )}
             </div>
           ) : <span />}
 

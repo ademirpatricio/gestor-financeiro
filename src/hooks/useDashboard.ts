@@ -31,7 +31,7 @@ export function useDashboard() {
   const [month, setMonth] = useState(currentMonthKey)
   // O hook já traz só o mês escolhido.
   const {
-    transactions: monthTransactions, loading,
+    transactions: monthTransactions, openingBalance, loading,
     addTransaction, updateTransaction, deleteTransaction, deleteAllTransactions,
   } = useTransactions(month)
   const { categories, addCategory, deleteCategory, updateCategory } = useCategories()
@@ -52,8 +52,16 @@ export function useDashboard() {
       if (t.type === 'income') { s.income += t.amount; s.incomeCount++ }
       else { s.expense += t.amount; s.expenseCount++ }
     }
-    return { ...s, balance: s.income - s.expense }
-  }, [monthTransactions])
+    const monthBalance = s.income - s.expense
+    // Saldo = o que sobrou dos meses anteriores + o resultado deste mês.
+    // Se a busca do saldo anterior falhar (null), conta só o mês.
+    return {
+      ...s,
+      monthBalance,
+      previousBalance: openingBalance,
+      balance: (openingBalance ?? 0) + monthBalance,
+    }
+  }, [monthTransactions, openingBalance])
 
   // O que aparece na lista: mês + aba (todos, entradas, saídas) + ordem.
   const visible = useMemo(
