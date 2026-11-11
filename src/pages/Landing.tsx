@@ -8,6 +8,7 @@ import {
   FileText,
   FolderOpen,
   ListFilter,
+  MessageCircle,
   Lock,
   Pencil,
   Tags,
@@ -23,17 +24,39 @@ import iconeCalendario from '../assets/images/icone-calendario.webp'
 import iconeRaio from '../assets/icons/hero-raio.svg'
 import iconeCelular from '../assets/icons/hero-celular.svg'
 import iconeCadeado from '../assets/icons/hero-cadeado.svg'
+import { AvatarStack, type Pessoa } from '../components/AvatarStack'
+import { InstagramIcon } from '../components/InstagramIcon'
 import { Reveal } from '../components/Reveal'
+import { WhatsappFloat } from '../components/WhatsappFloat'
+
+const instagramGrana = 'https://www.instagram.com/grana.malabares/'
+// WhatsApp da Malabares, já com a mensagem inicial.
+const suporteWhatsapp =
+  'https://wa.me/5581997278234?text=Ol%C3%A1!%20Vim%20pelo%20GRANA%20e%20preciso%20de%20ajuda%20com%20o%20aplicativo.'
 
 // Medidas em px. Sem valores do Figma, escolhi estes. Ajuste aqui se o design pedir outros.
 const container = 'mx-auto w-full max-w-[1120px] px-[24px]'
 const btnBase =
   'inline-flex items-center justify-center gap-[8px] rounded text-body font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust'
 const sizeLg = 'px-[28px] py-[14px]'
-const sizeSm = 'px-[20px] py-[10px]'
 const sizeHero = 'px-[24px] py-[18px]'
 const primary = 'bg-olive text-white hover:brightness-90'
 const ghost = 'border border-rust text-white hover:bg-white/10'
+
+// Pessoas reais que autorizaram aparecer. Coloque as fotos em public/usuarios/.
+// Enquanto a lista estiver vazia, o avatar stack não aparece na versão publicada.
+const pessoasReais: Pessoa[] = []
+
+// Imagens de exemplo, só para diagramar. Aparecem apenas no ambiente local (npm run dev)
+// e ficam de fora do build. Apague quando as fotos reais entrarem.
+const pessoasExemplo: Pessoa[] = [1, 2, 3, 4, 5].map((n) => ({
+  nome: `Exemplo ${n}`,
+  foto: `/usuarios/exemplo-${n}.svg`,
+}))
+
+const pessoas = import.meta.env.DEV ? pessoasExemplo : pessoasReais
+// Número real de usuários. Se ficar em branco, conta as pessoas da lista acima.
+const totalUsuarios: number | undefined = undefined
 
 const destaques = [
   { icone: iconeRaio, linhas: ['Simples de usar', 'e manter'] },
@@ -143,14 +166,28 @@ export function Landing() {
       {/* ── Topo ── */}
       <header className="absolute inset-x-0 top-0 z-10">
         <div className={`${container} flex items-center justify-between py-[24px]`}>
-          <Link to="/">
-            <img src="/logo-dark.svg" alt="Grana" className="h-[40px] w-auto" />
+          <Link to="/" aria-label="Grana, página inicial">
+            {/* No celular usa a versão compacta, para sobrar espaço no menu. */}
+            <img src="/logo-mobile-dark.svg" alt="" className="h-[40px] w-auto sm:hidden" />
+            <img src="/logo-dark.svg" alt="Grana" className="hidden h-[40px] w-auto sm:block" />
           </Link>
-          <nav aria-label="Acesso" className="flex items-center gap-[20px]">
+          <nav aria-label="Acesso" className="flex items-center gap-[12px] sm:gap-[20px]">
+            <a
+              href={suporteWhatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Suporte pelo WhatsApp (abre em outra aba)"
+              className="font-medium text-salmon_light hover:underline"
+            >
+              Suporte
+            </a>
             <Link to="/login" className="font-medium text-salmon_light hover:underline">
               Entrar
             </Link>
-            <Link to="/cadastro" className={`${btnBase} ${sizeSm} ${primary}`}>
+            <Link
+              to="/cadastro"
+              className={`${btnBase} ${primary} whitespace-nowrap px-[16px] py-[10px] sm:px-[20px]`}
+            >
               Criar conta
             </Link>
           </nav>
@@ -187,7 +224,10 @@ export function Landing() {
                 </Link>
               </div>
 
-              <ul className="mt-[48px] flex flex-wrap gap-x-[32px] gap-y-[16px]">
+              <AvatarStack pessoas={pessoas} total={totalUsuarios} className="mt-[48px]" />
+
+              {/* Tópicos escondidos por enquanto (display: none). */}
+              <ul className="mt-[48px] hidden flex-wrap gap-x-[32px] gap-y-[16px]">
                 {destaques.map(({ icone, linhas }) => (
                   <li key={linhas[0]} className="flex items-center">
                     <img
@@ -343,10 +383,21 @@ export function Landing() {
                 dinheiro e explica sem fazer você se sentir mal. É ele quem dá o tom do
                 Grana: papo reto e sem julgamento.
               </p>
-              <Link to="https://www.instagram.com/malabaresmkt" className={`${btnBase} ${sizeLg} ${primary}`}>
-                Segue a gente no Instagram
-                <ArrowRight size={18} aria-hidden="true" />
-              </Link>
+              <div className="mt-[32px]">
+                <p className="mb-[12px] text-small text-salmon_light">
+                  Passa lá para acompanhar as novidades do Grana.
+                </p>
+                <a
+                  href={instagramGrana}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Siga @grana.malabares no Instagram (abre em outra aba)"
+                  className={`${btnBase} ${sizeLg} ${ghost} w-full sm:w-auto`}
+                >
+                  <InstagramIcon size={20} />
+                  Siga @grana.malabares
+                </a>
+              </div>
             </Reveal>
           </div>
         </section>
@@ -403,36 +454,52 @@ export function Landing() {
         </section>
 
         {/* ── Perguntas rápidas ======================================== */}
-        <section
-          aria-labelledby="titulo-faq"
-          className="bg-salmon_light/50 py-14"
-        >
+        <section aria-labelledby="titulo-faq" className="bg-salmon_light py-20">
           <div
-            className={`${container}`}
+            className={`${container} grid gap-[40px] lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-[64px]`}
           >
-            <h2 id="titulo-faq" className="text-h4 mb-4 font-bold text-brown_dark">
-              Perguntas rápidas
-            </h2>
             <Reveal>
-              {perguntas.map(({ pergunta, resposta }) => (
-                <details key={pergunta} className="group py-5 border-b border-salmon/20">
-                  <summary className="flex cursor-pointer
-                  list-none items-center justify-between
-                  gap-4 font-bold text-brown_dark [&::-webkit-details-marker]:hidden">
+              <h2 id="titulo-faq" className="text-h3 font-bold text-brown_dark">
+                Perguntas rápidas
+              </h2>
+              <p className="mt-[16px] max-w-[360px] text-[18px] leading-[1.5] text-brown/80">
+                Não achou a sua dúvida? Fale com a gente pelo WhatsApp.
+              </p>
+              <a
+                href={suporteWhatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Falar com o suporte pelo WhatsApp (abre em outra aba)"
+                className={`${btnBase} ${sizeLg} mt-[24px] border border-terracotta text-terracotta hover:bg-terracotta/10`}
+              >
+                <MessageCircle size={20} aria-hidden="true" />
+                Falar no WhatsApp
+              </a>
+            </Reveal>
+
+            <Reveal delay={100}>
+              {perguntas.map(({ pergunta, resposta }, i) => (
+                <details
+                  key={pergunta}
+                  open={i === 0}
+                  className="group border-b border-brown/20 first:border-t"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-[16px] rounded py-[20px] text-[18px] font-bold text-brown_dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust [&::-webkit-details-marker]:hidden">
                     {pergunta}
                     <ChevronDown
-                      size={20}
+                      size={24}
                       aria-hidden="true"
-                      className="shrink-0 transition-transform group-open:rotate-180"
+                      className="shrink-0 text-terracotta transition-transform group-open:rotate-180"
                     />
                   </summary>
-                  <p className="mt-2">{resposta}</p>
+                  <p className="max-w-[640px] pb-[20px] pr-[40px] text-body leading-[1.5] text-brown/80">
+                    {resposta}
+                  </p>
                 </details>
               ))}
             </Reveal>
           </div>
         </section>
-
       </main>
 
       {/* ── Fechamento e rodapé: um fundo só ── */}
@@ -477,6 +544,15 @@ export function Landing() {
         <footer
           className={`${container} py-[32px] text-center text-small text-salmon_light`}
         >
+        <a
+          href={instagramGrana}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram do Grana (abre em outra aba)"
+          className="mx-auto mb-[8px] flex h-[44px] w-[44px] items-center justify-center rounded text-salmon_light transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust"
+        >
+          <InstagramIcon size={24} />
+        </a>
         <p>Grana. Sua vida financeira mais simples.</p>
         <p className="mt-[8px]">
           Criado por{' '}
@@ -500,6 +576,8 @@ export function Landing() {
         </p>
         </footer>
       </div>
+
+      <WhatsappFloat href={suporteWhatsapp} />
     </div>
   )
 }
