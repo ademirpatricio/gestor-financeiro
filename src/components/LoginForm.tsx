@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { FormField } from './FormField'
 
 type LoginFormProps = {
@@ -69,9 +70,9 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
           <input type="checkbox" className="rounded border-brown_light/30 accent-olive" />
           Lembrar de mim
         </label>
-        <a href="#" className="text-olive hover:text-olive_light hover:underline transition-colors">
+        <Link to="/esqueci-senha" className="text-olive hover:text-olive_light hover:underline transition-colors">
           Esqueceu sua senha?
-        </a>
+        </Link>
       </div>
 
       {error && <p className="text-terracotta">{error}</p>}

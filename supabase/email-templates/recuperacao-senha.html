@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crie uma nova senha no Grana</title>
+</head>
+<body style="margin:0;padding:0;background-color:#FBF8F5;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#FBF8F5;">Use o link para escolher uma nova senha.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#FBF8F5;">
+  <tr>
+    <td align="center" style="padding:32px 16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
+        <tr>
+          <td align="center" style="padding:0 0 24px 0;font-family:Arial,Helvetica,sans-serif;font-size:32px;font-weight:bold;color:#a34630;letter-spacing:-0.5px;">
+            Grana
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#ffffff;border:1px solid #E2D9D0;border-radius:8px;padding:36px 32px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:#3D2B1F;">
+            <h1 style="margin:0 0 16px 0;font-size:24px;line-height:1.25;color:#2D1F17;">Vamos criar uma nova senha</h1>
+            <p style="margin:0 0 16px 0;">Recebemos um pedido para trocar a senha da sua conta no Grana. Clique no botão para escolher outra.</p>
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:24px 0;">
+              <tr>
+                <td style="background-color:#5A6B3A;border-radius:6px;">
+                  <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 28px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:#FBF8F5;text-decoration:none;">Criar nova senha</a>
+                </td>
+              </tr>
+            </table>
+            <p style="margin:0 0 12px 0;font-size:13px;line-height:1.4;color:#8A7A70;">Se o botão não abrir, copie e cole este endereço no navegador:<br><a href="{{ .ConfirmationURL }}" style="color:#5A6B3A;word-break:break-all;">{{ .ConfirmationURL }}</a></p>
+            <p style="margin:0 0 12px 0;font-size:13px;line-height:1.4;color:#8A7A70;">Esse link vale por pouco tempo e só pode ser usado uma vez. Se você não pediu, ignore este e-mail. Sua senha continua a mesma.</p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:24px 16px 0 16px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.4;color:#8A7A70;">
+Grana, por Malabares MKT &amp; TEC<br>Pequenas escolhas geram grandes conquistas.
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

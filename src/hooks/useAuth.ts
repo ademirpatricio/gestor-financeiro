@@ -29,7 +29,7 @@ export function useAuth() {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { name } },
+      options: { data: { name }, emailRedirectTo: window.location.origin },
     })
     if (error) throw error
     return Boolean(data.session)
@@ -45,9 +45,17 @@ export function useAuth() {
     if (error) throw error
   }
 
+  // Manda o e-mail de recuperação. O link leva para /redefinir-senha.
+  async function sendPasswordReset(email: string) {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/redefinir-senha`,
+    })
+    if (error) throw error
+  }
+
   async function signOut() {
     await supabase.auth.signOut()
   }
 
-  return { session, loading, signIn, signUp, signOut, updateName, updatePassword }
+  return { session, loading, signIn, signUp, signOut, updateName, updatePassword, sendPasswordReset }
 }
