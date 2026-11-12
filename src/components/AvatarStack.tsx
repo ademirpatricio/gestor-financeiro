@@ -34,7 +34,7 @@ export function AvatarStack({ pessoas, total, className = '' }: Props) {
                 width={44}
                 height={44}
                 loading="lazy"
-                className="h-[44px] w-[44px] rounded-full object-cover ring-2 ring-brown_dark"
+                className="h-[40px] w-[44px] rounded-full object-cover ring-2 ring-brown_dark"
               />
             ) : (
               <span
